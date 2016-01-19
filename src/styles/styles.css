@@ -277,7 +277,7 @@ body {
   height: 100%;
 }
 .slider-container .slider-inner-container .slide-1 {
-  background: url("img/steampunk-room/bodie-bg.jpg");
+  background: url("../img/steampunk-room/bodie-bg.jpg");
   background-size: cover;
 }
 .slider-container .slider-inner-container .slide-1 .bodie-flyer {
@@ -288,7 +288,7 @@ body {
   left: 12%;
 }
 .slider-container .slider-inner-container .slide-2 {
-  background: url("img/steampunk-room/wood-center-exp.jpg") repeat-x;
+  background: url("../img/steampunk-room/wood-center-exp.jpg") repeat-x;
   background-size: auto 100%;
 }
 .slider-container .slider-inner-container .slide-2 .newspaper {
@@ -305,7 +305,7 @@ body {
   left: 58%;
 }
 .slider-container .slider-inner-container .slide-3 {
-  background: url("img/steampunk-room/center-canvas.jpg");
+  background: url("../img/steampunk-room/center-canvas.jpg");
   background-size: cover;
 }
 .slider-container .slider-inner-container .slide-3 .machine-diagrams {
@@ -351,7 +351,7 @@ body {
   left: 0;
 }
 .slider-container .slider-inner-container .slide-4 {
-  background: url("img/steampunk-room/bodie-bg.jpg");
+  background: url("../img/steampunk-room/bodie-bg.jpg");
   background-size: cover;
 }
 .slider-container .artifact-group-container {
@@ -671,7 +671,7 @@ body {
   height: 100%;
   left: 5px;
   right: 10px;
-  background: url("steampunk-room-ui/player/player-chain.png") center repeat-x;
+  background: url("../steampunk-room-ui/player/player-chain.png") center repeat-x;
   background-size: 53px 10px;
 }
 .steampunk-player-bar .playbar-container .scroll-container .scroll-track .nav-progress-indicator-container .nav-progress-indicator {
@@ -695,7 +695,7 @@ body {
        -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   height: 83%;
-  background: url("steampunk-room-ui/player/scroll-teeth.png") repeat-x;
+  background: url("../steampunk-room-ui/player/scroll-teeth.png") repeat-x;
   background-size: auto 100%;
 }
 .steampunk-player-bar .playbar-container .scroll-container .scroll-cap {
@@ -790,7 +790,6 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
   visibility: hidden;
   opacity: 0;
   z-index: -1000;
@@ -802,11 +801,13 @@ body {
 }
 .modal.is-staged {
   z-index: 1000;
-  display: block;
   visibility: visible;
 }
 .modal.is-visible {
   opacity: 1;
+}
+.modal.is-hidden {
+  display: none;
 }
 .modal__box {
   position: absolute;
@@ -1380,7 +1381,7 @@ body {
   height: 100%;
 }
 .modal.utility-modal.loading-screen {
-  background: black url("steampunk-room-ui/objects.jpg") center no-repeat;
+  background: black url("../steampunk-room-ui/objects.jpg") center no-repeat;
   background-size: contain;
 }
 .modal.utility-modal.device-rotate-screen {

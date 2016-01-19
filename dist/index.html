@@ -5,8 +5,7 @@
 	<meta charset="utf-8">
 	<title>Area 15 | Table Prototype | Steampunk</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="normalize.css" type="text/css">
-	<link rel="stylesheet" href="styles-concrete.css" type="text/css">
+	<link rel="stylesheet" href="styles/styles.min.css" type="text/css">
 
 </head>
 
@@ -337,7 +336,7 @@
 					<div class="modal-slide">
 						<div class="modal-model-container" data-model-path="steampunk-room-models/battery.js" data-camera-position="-1.2 4.2 -1.8" data-model-position="-.15 -1 -.3">
 							<div class="webgl-rendering-indicator loading-in-progress">RENDER IN PROGRESS...</div>
-							<canvas width="100%" height="100%"></canvas>
+							<canvas></canvas>
 							<div class="renderer-info-tag">
 				    			MazMen Construct Renderer
 				    		</div>
@@ -382,7 +381,7 @@
 
 	<!-- LOADING MODAL -->
 
-	<div class="modal utility-modal loading-screen">
+	<div class="modal utility-modal is-staged is-visible loading-screen">
 		<div class="modal__box">
 			<svg class="utility-screen-logo loading-screen-logo loading-in-progress" viewBox="0 0 60.8 53.1">
 				<g>
@@ -405,16 +404,9 @@
 		</div>
 	</div>
 
-
-<!-- VENDOR SCRIPTS -->
-<script src="js/jquery.min.js"></script>
-<script src="js/ScrollToPlugin.min.js"></script>
-<script src="js/TweenMax.min.js"></script>
-<script src="js/three.min.js"></script>
-<script src="js/OrbitControls.js" type="text/javascript"></script>
-
-<!-- MAIN SCRIPTS -->
-<script src="js/main-clean.js"></script>
+<!-- SCRIPTS -->
+<script src="scripts/vendor.min.js"></script>
+<script src="scripts/scripts.min.js"></script>
 
 
 </body>

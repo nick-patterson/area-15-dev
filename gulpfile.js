@@ -13,9 +13,10 @@ var gulp            = require('gulp'),
     reload          = browserSync.reload;
 
 var src = {
-  scss:    './src/styles/styles.scss',
-  js:      './src/scripts/*.js',
-}
+  scss:       './src/styles/styles.scss',
+  js:         './src/scripts/*.js',
+  vendorJs:   './src/scripts/vendors/*.js'
+};
 
 gulp.task('serve', ['sass'], function() {
     browserSync({
@@ -33,7 +34,7 @@ gulp.task('serve', ['sass'], function() {
 
     gulp.watch(src.scss, ['sass']);
     gulp.watch('./dist/*.html').on('change', reload);
-    gulp.watch('./dist/scripts/*.js').on('change', reload);
+    gulp.watch('./dist/scripts/*/*.js').on('change', reload);
 });
 
 gulp.task('scripts', function(){
@@ -41,6 +42,11 @@ gulp.task('scripts', function(){
     .pipe(plumber())
     .pipe(uglify())
     .pipe(concat('scripts.min.js'))
+    .pipe(gulp.dest('./dist/scripts/'));
+  gulp.src(src.vendorJs)
+    .pipe(plumber())
+    .pipe(uglify())
+    .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest('./dist/scripts/'));
 });
 

@@ -335,10 +335,7 @@ var modal = {
 			};
 
 
-	    	modal.current.addClass('is-staged');
-	    	window.setTimeout(function(){
-	    		modal.current.addClass('is-visible');
-	    	},1);
+	    	modal.current.addClass('is-staged is-visible');
 	    });
 
 	    $('.modal__box').on('click', function(event) {
@@ -927,6 +924,7 @@ var loadingScreen = {
 		loadingScreen.removeClass('is-visible');
 		window.setTimeout(function(){
 			loadingScreen.removeClass('is-staged');
+			loadingScreen.addClass('is-hidden');
 		},250);
 	}
 };
@@ -1011,7 +1009,7 @@ var dynamicImageLoad = {
 $(document).ready(function(event){
 
 	dynamicImageLoad.init();
-	//loadingScreen.init();
+	loadingScreen.init();
 
 });
 
