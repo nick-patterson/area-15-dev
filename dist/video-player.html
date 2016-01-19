@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Area 15 | Table Prototype | Steampunk</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="normalize.css" type="text/css">
+	<link rel="stylesheet" href="styles-concrete.css" type="text/css">
+
+</head>
+
+<body>
+
+	<!-- SLIDER -->
+
+	<div class="slider-container">
+		<div class="slider-inner-container">
+
+			<div class="slide slide-1">
+				<div data-title="Bodie Flyer" class="artifact by-height ui-border js-tooltip bodie-flyer vertical-align">
+					<img data-target="#the-video-modal" class="js-modal" high-res-src="img/steampunk-room/bodie-flyer.png">
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<!--/// UI  ///-->
+
+	<!-- Map Button -->
+	<div class="js-ui-interactive steampunk-map-button-container">
+		<img class="map-button-passive" high-res-src="steampunk-room-ui/map-view-passive.png">
+		<img class="js-ui-active map-button-active" high-res-src="steampunk-room-ui/map-view-active.png">
+		<img class="js-ui-rotate-right map-button-knob-passive" high-res-src="steampunk-room-ui/map-view-knob-passive.png">
+		<img class="js-ui-rotate-right js-ui-flicker map-button-knob-flicker" high-res-src="steampunk-room-ui/map-view-knob-flicker.png">
+		<img class="js-ui-rotate-right js-ui-active map-button-knob-active" high-res-src="steampunk-room-ui/map-view-knob-active.png">
+	</div>
+
+
+	<!-- Player Bar -->
+	<div class="steampunk-player-bar">
+
+		<!-- Left Side -->
+		<img class="main-player-bg" high-res-src="steampunk-room-ui/player/main.png">
+		<img class="track track-left" high-res-src="steampunk-room-ui/player/track-left.png">
+		<img class="brace brace-left" high-res-src="steampunk-room-ui/player/brace-left.png">
+
+		<!-- Decorative Knob -->
+		<img class="decorative-knob" high-res-src="steampunk-room-ui/player/decorative-knob.png">
+		<img class="js-ui-flicker decorative-knob-flicker" high-res-src="steampunk-room-ui/player/decorative-knob-flicker.png">
+
+		<!-- EQ -->
+		<img class="eq" high-res-src="steampunk-room-ui/player/eq.png">
+
+		<!-- Right Side -->
+		<img class="track track-right" high-res-src="steampunk-room-ui/player/track-right.png">
+		<img class="brace brace-right" high-res-src="steampunk-room-ui/player/brace-right.png">
+
+		<!-- Nav -->
+		<div class="js-ui-interactive nav-next-container">
+			<img class="nav-control nav-next" high-res-src="steampunk-room-ui/player/right-button-passive.png">
+		</div>
+		<div class="js-ui-interactive nav-previous-container">
+			<img class="nav-control nav-previous" high-res-src="steampunk-room-ui/player/left-button-passive.png">
+		</div>
+
+		<!-- Scrolling Bar -->
+		<div class="playbar-container">
+			<div class="scroll-container">
+				<div class="scroll-track">
+					<div class="nav-progress-indicator-container">
+						<img class="scroll-bolt nav-progress-indicator" high-res-src="steampunk-room-ui/player/scroll-bolt.png">
+						<img class="js-ui-flicker scroll-bolt-flicker nav-progress-indicator" high-res-src="steampunk-room-ui/player/scroll-bolt-flicker.png">
+					</div>
+				</div>
+				<div class="scroll-teeth">
+				</div>
+				<img class="scroll-cap scroll-cap-left" high-res-src="steampunk-room-ui/player/scroll-cap-left.png">
+				<img class="scroll-cap scroll-cap-right" high-res-src="steampunk-room-ui/player/scroll-cap-right.png">
+			</div>
+			<img class="cog-window cog-window-right" high-res-src="steampunk-room-ui/player/cog-window-right.png">
+			<img class="cog-window cog-window-left" high-res-src="steampunk-room-ui/player/cog-window-left.png">
+		</div>
+
+		<!-- Gilding -->
+		<img class="gilding" high-res-src="steampunk-room-ui/player/gilding.png">
+	</div>
+
+	<!-- Tooltips -->
+
+	
+	<div class="tooltip">
+		<div class="tooltip-magnifying-glass">
+			<svg width="100%" height="100%">
+				<circle cx="43%" cy="43%" r="35%"/>
+				<line x1="65%" y1="65%" x2="100%" y2="100%"/>
+			</svg>
+		</div>
+		<div class="tooltip-text">
+			&nbsp;
+		</div>
+	</div>
+
+	<!--///  MODALS ///-->
+
+	<!-- Video Modal -->
+
+	<div id="the-video-modal" class="modal video-modal">
+		<div class="modal__box">
+			<div class="MMVP-video modal-video-container">
+				<div class="modal-video-inner-container">
+					<video class="modal-video">
+				        <source src="videos/helicopter.mp4" type="video/mp4">
+				    </video>
+				    <div class="MMVP-video-controls">
+				    	<div class="MMVP-video-info-tag">
+				    		MazMen Digital Media Player
+				    	</div>
+				       	<button class="MMVP-video-control MMVP-video-controls-play-pause">
+				        	<svg width="100%" height="100%" viewBox="0 0 63 72.8">
+							<path class="MMVP-play-path" d="M2,11.8V3.5l9.7,5.6L25.5,17l11.7,6.8l11,6.4l10.7,6.1l-10.7,6.1l-11,6.4l-11.7,6.8l-13.8,7.9L2,69.1v-8.3 M2,19.8v16.5v16.5"/>
+							<path class="MMVP-pause-path" d="M16.3,63.4v6.2H2v-6.2 M16.3,8.2V2H2v6.3 M2,55.2V16.5 M16.3,55.2V16.5 M34.5,63.4v6.2h14.3v-6.2 M48.9,8.2V2 H34.5v6.3 M34.5,16.5v38.7 M48.9,55.2V16.5"/>
+							</svg>
+				        </button>
+				        <div class="MMVP-video-progress-indicator">
+				        	Loading...
+				        </div>
+				        <button class="MMVP-video-control MMVP-video-controls-fullscreen-toggle">
+				        	<svg width="100%" height="100%" viewBox="0 0 63 72.8">
+							<path class="MMVP-fullscreen-path" d="M1.9,23.4V2.1h23.1 M65,23.4V2.1H43.5 M1.9,40.6v24.5h23.1 M43.5,65.1H65V40.6 M33.2,15.7v35 M50.7,33.2h-35"/>
+							<path class="MMVP-normal-view-path" d="M2,23.4V2h23.1 M65,23.4V2H43.6 M2,40.6v24.5h23.1 M43.6,65.1H65V40.6 M50.7,33.1h-35"/>
+							</svg>
+				        </button>
+				        <div class="MMVP-volume-controls-container">
+					        <button class="MMVP-video-control MMVP-video-controls-volume">
+					        	<svg width="100%" height="100%" viewBox="0 0 63 72.8">
+								<path class="MMVP-loud-path" d="M50.5,1.9c11.8,4.7,20.1,16.2,20.1,29.7c0,13.5-8.3,25-20.1,29.7"/>
+								<path class="MMVP-normal-path" d="M45.7,12.4c7.6,3,13,10.5,13,19.1c0,8.7-5.4,16.1-13,19.1"/>
+								<path class="MMVP-quiet-path" d="M41.1,23.6c3.1,1.3,5.4,4.3,5.4,7.9c0,3.6-2.2,6.7-5.4,7.9"/>
+								<path class="MMVP-speaker-path" d="M16.6,22.2l15.7-9.3v37.3l-15.7-9.3V22.2z M2,40.9h14.6V22.2H2V40.9z"/>
+								<path class="MMVP-muted-path" d="M44.9,39.9l16.7-16.7 M61.6,39.9L44.9,23.2"/>
+								</svg>
+					        </button>
+					        <div class="MMVP-volume-slider-box">
+					        	<div class="MMVP-volume-slider-box-interaction">
+					        	</div>
+								<div class="MMVP-volume-triangle">
+									<div class="MMVP-volume-triangle-outer">
+									</div>
+									<div class="MMVP-volume-triangle-inner">
+									</div>
+								</div>
+								<div class="MMVP-volume-slider-container">
+									<div class="MMVP-volume-slider">
+									</div>
+									<div class="MMVP-volume-slider-grabber-interaction">
+										<div class="MMVP-volume-slider-grabber">
+										</div>
+									</div>
+								</div>
+							</div>
+					    </div>
+					    <div class="MMVP-video-progress-bar-interaction">
+				        	<div class="MMVP-video-progress-bar-container">
+				        		<div class="MMVP-video-progress-bar">
+				        			<div class="MMVP-video-progress-grabber-interaction">
+				        				<div class="MMVP-video-progress-grabber">
+				        				</div>
+				        			</div>
+				        		</div>
+				    		</div>
+				    	</div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+		<a href="javascript:;" class="close-button js-close-modal" href="">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="100%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="100%" />
+			</svg>
+		</a>
+	</div>
+
+
+
+<!-- VENDOR SCRIPTS -->
+<script src="js/jquery.min.js"></script>
+<script src="js/ScrollToPlugin.min.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/three.min.js"></script>
+<script src="js/OrbitControls.js" type="text/javascript"></script>
+
+<!-- MAIN SCRIPTS -->
+<script src="js/main-clean.js"></script>
+
+
+</body>
+
+</html>

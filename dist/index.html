@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Area 15 | Table Prototype | Steampunk</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="normalize.css" type="text/css">
+	<link rel="stylesheet" href="styles-concrete.css" type="text/css">
+
+</head>
+
+<body>
+
+	<!-- SLIDER -->
+
+	<div class="slider-container">
+		<div class="slider-inner-container">
+
+			<div class="slide slide-1">
+				<div data-title="Bodie Flyer" class="artifact by-height ui-border js-tooltip bodie-flyer vertical-align">
+					<img data-target="#flyer-modal" class="js-modal" high-res-src="img/steampunk-room/bodie-flyer.png">
+				</div>
+				
+			</div>
+
+			<div class="slide slide-2">
+				<img class="edge-left" high-res-src="img/steampunk-room/wood-left-edge.jpg">
+				<img class="edge-right" high-res-src="img/steampunk-room/wood-right-edge.jpg">
+				<div class="artifact-group-container vertical-align">
+					<div data-title="Newspaper" class="artifact by-height ui-border js-tooltip newspaper horizontal-align">
+						<img data-target="#newspaper-modal" class="js-modal" high-res-src="img/steampunk-room/newspaper.png">
+					</div>
+					<div data-title="Newspaper" class="artifact by-height articles no-pointer">
+						<img data-target="#newspaper-modal" class="js-modal" high-res-src="img/steampunk-room/articles.png">
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="slide slide-3">
+				<img class="edge-left" high-res-src="img/steampunk-room/canvas-left-edge.png">
+				<img class="edge-right" high-res-src="img/steampunk-room/canvas-right-edge.png">
+				<div data-title="Machine Diagrams" class="artifact by-height machine-diagrams ui-border js-tooltip">
+					<img data-target="#machine-diagrams-modal" class="js-modal" high-res-src="img/steampunk-room/machine-diagrams.png">
+				</div>
+
+				<div class="artifact by-height battery">
+					<img high-res-src="img/steampunk-room/battery-shadow.png" class="battery-shadow">
+					<img data-title="Strange Battery" data-target="#battery-modal" class="js-modal js-tooltip battery-pic" high-res-src="img/steampunk-room/battery-top.png">
+				</div>
+				
+			</div>
+
+			<div class="slide slide-4">
+				
+			</div>
+
+		</div>
+	</div>
+
+	<!--/// UI  ///-->
+
+	<!-- Map Button -->
+	<div class="js-ui-interactive steampunk-map-button-container">
+		<img class="map-button-passive" high-res-src="steampunk-room-ui/map-view-passive.png">
+		<img class="js-ui-active map-button-active" high-res-src="steampunk-room-ui/map-view-active.png">
+		<img class="js-ui-rotate-right map-button-knob-passive" high-res-src="steampunk-room-ui/map-view-knob-passive.png">
+		<img class="js-ui-rotate-right js-ui-flicker map-button-knob-flicker" high-res-src="steampunk-room-ui/map-view-knob-flicker.png">
+		<img class="js-ui-rotate-right js-ui-active map-button-knob-active" high-res-src="steampunk-room-ui/map-view-knob-active.png">
+	</div>
+
+
+	<!-- Player Bar -->
+	<div class="steampunk-player-bar">
+
+		<!-- Left Side -->
+		<img class="main-player-bg" high-res-src="steampunk-room-ui/player/main.png">
+		<img class="track track-left" high-res-src="steampunk-room-ui/player/track-left.png">
+		<img class="brace brace-left" high-res-src="steampunk-room-ui/player/brace-left.png">
+
+		<!-- Decorative Knob -->
+		<img class="decorative-knob" high-res-src="steampunk-room-ui/player/decorative-knob.png">
+		<img class="js-ui-flicker decorative-knob-flicker" high-res-src="steampunk-room-ui/player/decorative-knob-flicker.png">
+
+		<!-- EQ -->
+		<img class="eq" high-res-src="steampunk-room-ui/player/eq.png">
+
+		<!-- Right Side -->
+		<img class="track track-right" high-res-src="steampunk-room-ui/player/track-right.png">
+		<img class="brace brace-right" high-res-src="steampunk-room-ui/player/brace-right.png">
+
+		<!-- Nav -->
+		<div class="js-ui-interactive nav-next-container">
+			<img class="nav-control nav-next" high-res-src="steampunk-room-ui/player/right-button-passive.png">
+		</div>
+		<div class="js-ui-interactive nav-previous-container">
+			<img class="nav-control nav-previous" high-res-src="steampunk-room-ui/player/left-button-passive.png">
+		</div>
+
+		<!-- Scrolling Bar -->
+		<div class="playbar-container">
+			<div class="scroll-container">
+				<div class="scroll-track">
+					<div class="nav-progress-indicator-container">
+						<img class="scroll-bolt nav-progress-indicator" high-res-src="steampunk-room-ui/player/scroll-bolt.png">
+						<img class="js-ui-flicker scroll-bolt-flicker nav-progress-indicator" high-res-src="steampunk-room-ui/player/scroll-bolt-flicker.png">
+					</div>
+				</div>
+				<div class="scroll-teeth">
+				</div>
+				<img class="scroll-cap scroll-cap-left" high-res-src="steampunk-room-ui/player/scroll-cap-left.png">
+				<img class="scroll-cap scroll-cap-right" high-res-src="steampunk-room-ui/player/scroll-cap-right.png">
+			</div>
+			<img class="cog-window cog-window-right" high-res-src="steampunk-room-ui/player/cog-window-right.png">
+			<img class="cog-window cog-window-left" high-res-src="steampunk-room-ui/player/cog-window-left.png">
+		</div>
+
+		<!-- Gilding -->
+		<img class="gilding" high-res-src="steampunk-room-ui/player/gilding.png">
+	</div>
+
+	<!-- Tooltips -->
+
+	
+	<div class="tooltip">
+		<div class="tooltip-magnifying-glass">
+			<svg width="100%" height="100%">
+				<circle cx="43%" cy="43%" r="35%"/>
+				<line x1="65%" y1="65%" x2="100%" y2="100%"/>
+			</svg>
+		</div>
+		<div class="tooltip-text">
+			&nbsp;
+		</div>
+	</div>
+
+	<!--///  MODALS ///-->
+
+	<!-- Flyer Modal -->
+
+	<div id="flyer-modal" class="modal">
+		<div class="modal__box">
+			<div class="modal-slide-container">
+				<div class="modal-slide-inner-container">
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/bodie-flyer.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Bodie Flyer</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:;" class="modal-nav-control nav-previous">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="modal-nav-control nav-next">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="close-button js-close-modal" href="">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="100%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="100%" />
+			</svg>
+		</a>
+	</div>
+
+	<!-- Newspaper Modal -->
+
+	<div id="newspaper-modal" class="modal">
+		<div class="modal__box">
+			<div class="modal-slide-container">
+				<div class="modal-slide-inner-container">
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/newspaper.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">The Pioneer Journal</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/article-1.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Article No. 1</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/article-2.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Article No. 2</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/article-3.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Article No. 3</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:;" class="modal-nav-control nav-previous">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="modal-nav-control nav-next">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="close-button js-close-modal" href="">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="100%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="100%" />
+			</svg>
+		</a>
+	</div>
+
+	<!-- Machine Diagrams Modal -->
+
+	<div id="machine-diagrams-modal" class="modal">
+		<div class="modal__box">
+			<div class="modal-slide-container">
+				<div class="modal-slide-inner-container">
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/sc-reactor.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Superconducting Reactor</h2>
+								<p class="modal-artifact-description">
+									A faded description in the bottom right corner reads: The SUPERCONDUCTING REACTOR utilizes the centripedal force generated by a rapidly rotating plutonium core in order to recycle its expelled neutrons back towards the core itself, allowing for a much higher reaction yield in a much smaller time than with previous designs. The tungsten rotating shell transfers the nuclear energy into kinetic energy that generates an electromagnetic field inside of a motor encased by supercooled, superconducting metallic hydrogen compounds.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/brainwave-specs.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Brainwave Mapping Spectacles</h2>
+								<p class="modal-artifact-description">
+									The BRAINWAVE MAPPING SPECTACLES utilize piezoelectric silicon sensors and actuators combined with highly attuned enriched magnesium and gallium flux receptors to capture and record changes in magnetic flux, electromagnetic field, skin temperature, skin moisture content, air and skin salinity, and mecahnical vibration of the specimen wearing the device. The gathered information is processed by the DUTRA-MIND algorithm and is translated from raw input data into comprehensible language and imagery.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-slide">
+						<div class="modal-image-container">
+							<img class="modal-image" high-res-src="img/steampunk-room/donut-gun.png">
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Mobile Satisfaction Injector</h2>
+								<p class="modal-artifact-description">
+									The MOBILE SATISFACTION INJECTOR features an array of reloadable magazines that carry concentrated ingredients from each of the protein, carbohydrate, and lipid families of organic macromolecules. These raw ingredients are sent via sterile teflon tubing to a mixing hub driven by a platinum-caesium catalyst. The mixed compounds are then ejected from the barrel of the device and allowed to react with the atmosphere to cool and solidify into their chosen final form, usually donuts. Why? Because donuts.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:;" class="modal-nav-control nav-previous">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="modal-nav-control nav-next">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="50%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="50%" y2="100%" />
+			</svg>
+		</a>
+		<a href="javascript:;" class="close-button js-close-modal" href="">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="100%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="100%" />
+			</svg>
+		</a>
+	</div>
+
+	<!-- Battery Modal -->
+
+	<div id="battery-modal" class="modal">
+		<div class="modal__box">
+			<div class="modal-slide-container">
+				<div class="modal-slide-inner-container">
+					<div class="modal-slide">
+						<div class="modal-model-container" data-model-path="steampunk-room-models/battery.js" data-camera-position="-1.2 4.2 -1.8" data-model-position="-.15 -1 -.3">
+							<div class="webgl-rendering-indicator loading-in-progress">RENDER IN PROGRESS...</div>
+							<canvas width="100%" height="100%"></canvas>
+							<div class="renderer-info-tag">
+				    			MazMen Construct Renderer
+				    		</div>
+						</div>
+						<div class="modal-text-container">
+							<div class="modal-text">
+							<h2 class="modal-artifact-title">Strange Battery</h2>
+								<p class="modal-artifact-description">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:;" class="close-button js-close-modal" href="">
+			<svg width="100%" height="100%">
+				<line stroke-width="2" stroke="white" x1="0%" x2="100%" y1="0%" y2="100%" />
+				<line stroke-width="2" stroke="white" x1="100%" x2="0%" y1="0%" y2="100%" />
+			</svg>
+		</a>
+	</div>
+
+	<!-- DEVICE ROTATE MODAL -->
+
+	<div class="modal utility-modal is-staged is-visible device-rotate-screen">
+		<div class="modal__box">
+			<svg class="utility-screen-logo device-rotate-logo" viewBox="-3 -3 646.7 649.7">
+				<path id="rotate-path" class="stroked" d="M141.2,35.4l0,572.9c0,9.4,3.7,18.3,10.4,25c6.7,6.7,15.6,10.4,25,10.4H467c19.5,0,35.4-15.9,35.4-35.4l0-572.9
+		c0-9.8-4-18.6-10.4-25C485.6,4,476.8,0,467,0L176.6,0C157.1,0,141.3,15.9,141.2,35.4z M460.4,42l0,559.7H183.2l0-559.7H460.4z
+		 M536.2,140.4V83.1c4.3,3.8,8.4,7.8,12.5,11.9c60.6,60.6,94,141.2,94,226.9c0,85.7-33.4,166.3-94,226.9c-4.1,4.1-8.3,8-12.5,11.9
+		l0-57.3c43-50.7,66.5-114.3,66.5-181.5c0-42.3-9.3-83.2-26.9-120.3l-39.6,14.5L536.2,140.4z M107.5,503.3v57.3
+		c-4.3-3.8-8.4-7.8-12.5-11.9C34.4,488.1,1,407.5,1,321.8C1,236.1,34.4,155.6,95,95c4.1-4.1,8.3-8,12.5-11.9v57.3
+		C64.5,191,41,254.6,41,321.8c0,42.3,9.3,83.2,26.9,120.3l39.6-14.5V503.3z"/>
+			</svg>
+			<div class="device-rotate-text-container">
+				<h1 class="utility-screen-text device-rotate-text">Please <span class="text-bold">rotate</span> your device</h1>
+			</div>
+		</div>
+	</div>
+
+	<!-- LOADING MODAL -->
+
+	<div class="modal utility-modal loading-screen">
+		<div class="modal__box">
+			<svg class="utility-screen-logo loading-screen-logo loading-in-progress" viewBox="0 0 60.8 53.1">
+				<g>
+					<polygon class="triangle" points="29.8,1.3 1,1.3 29.8,51.4 58.6,1.3 	"/>
+					<polygon class="triangle" points="29.8,3.8 5.9,3.8 29.8,46.8 53.7,3.8 	"/>
+					<line class="st0" x1="10.9" y1="18.6" x2="48.5" y2="18.6"/>
+					<line class="st0" x1="20.5" y1="35.3" x2="39.1" y2="35.3"/>
+					<path class="filled" d="M27,11.6c1.1-0.4,1.5-1.4,1.5-2.5c0-1.6-1.1-2.3-2-2.3h-2.4v8.8h0.9v-3.9h1l2,4.1l0.8-0.4L27,11.6z M25.1,10.8
+								V7.5h1.1c0.9,0,1.5,0.4,1.5,1.5c0,1.2-0.5,1.8-1.2,1.8H25.1z"/>
+					<polygon class="filled" points="36.3,6.7 36.3,7.5 32.9,7.5 32.9,10.4 35.8,10.4 35.8,11.2 32.9,11.2 32.9,14.8 36.3,14.8 36.3,15.5 
+								32.1,15.5 32.1,6.7 	"/>
+					<path class="filled" d="M42.4,6.7h-1.1l-2.2,8.7l0.9,0.2l0.7-2.9h2.4l0.7,2.9l0.9-0.2L42.4,6.7z M40.9,12l1-4.1h0l1,4.1H40.9z"/>
+					<path class="filled" d="M19,6.7h-1.1l-2.2,8.7l0.9,0.2l0.7-2.9h2.4l0.7,2.9l0.9-0.2L19,6.7z M17.5,12l1-4.1h0l1,4.1H17.5z"/>
+					<polygon class="filled" points="26.6,21.8 26.6,30 28.5,30 28.5,30.7 23.5,30.7 23.5,30 25.7,30 25.7,23 24.1,23.6 23.9,22.8 	"/>
+					<path class="filled" d="M36.3,21.9v0.8h-3.6v2.7c0.4-0.2,0.8-0.3,1.3-0.3c1.3,0,2.4,0.9,2.4,2.3c0,1.1-0.6,2.1-1.6,2.7
+								c-0.7,0.4-1.6,0.7-3.3,0.7V30c1.1,0,2-0.1,2.6-0.4c0.8-0.4,1.4-1.2,1.4-2.2c0-0.9-0.6-1.5-1.6-1.5c-0.6,0-1,0.2-1.5,0.5h-0.6v-4.5
+							H36.3z"/>
+				</g>
+			</svg>
+		</div>
+	</div>
+
+
+<!-- VENDOR SCRIPTS -->
+<script src="js/jquery.min.js"></script>
+<script src="js/ScrollToPlugin.min.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/three.min.js"></script>
+<script src="js/OrbitControls.js" type="text/javascript"></script>
+
+<!-- MAIN SCRIPTS -->
+<script src="js/main-clean.js"></script>
+
+
+</body>
+
+</html>

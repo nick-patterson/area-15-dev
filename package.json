@@ -1,0 +1,34 @@
+{
+  "name": "Area 15",
+  "version": "0.0.1",
+  "description": "Build System for Area 15",
+  "author": "Nick Patterson [nick.patterson@15four.com]",
+  "license": "MIT",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pambas/batter-gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "sass",
+    "build"
+  ],
+  "devDependencies": {
+    "browser-sync": "^2.7.13",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-minify-css": "^0.5.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-nunjucks-render": "^0.1.3",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-ruby-sass": "^1.0.0-alpha.3",
+    "gulp-uglify": "^1.2.0"
+  }
+}
