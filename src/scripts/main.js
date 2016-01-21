@@ -116,287 +116,6 @@ function Area15Slider(userConfig) {
 	this.loadNextScene = '';
 }
 
-
-// ====================================================//
-// ==========   MAIN OBJECTS   ========================//
-// ====================================================//
-
-var slider = new Area15Slider({name: 'Main Slider', hasProgress: true});
-
-var modal = {
-
-	current: '',
-
-	init: function() {
-
-		// LOAD ALL WEBGL MODELS
-
-		modal.loadModels.init();
-
-		// SET UP MODAL SLIDER OBJECT
-
-		var modalSlider = new Area15Slider({
-	     		name: 'Modal Slider',
-	     		navControl: $('.modal-nav-control'),
-				slideTime: 0.8
-		});
-
-		modal.slider = modalSlider;
-		modal.slider.init();
-
-		// SET UP MODAL VIDEO PLAYER OBJECT
-
-		var modalVideoPlayer = new FifteenFourVideoPlayer({
-			name: 'Modal Video Player'
-		});
-
-		modal.videoPlayer = modalVideoPlayer;
-
-		// LAUNCH MODAL & UPDATE VARS
-
-	    $('.js-modal').on('click', function(event) {
-
-	     	event.preventDefault();
-
-	     	modal.current = $($(this).data('target'));
-
-	     	modalSlider.slide = modal.current.find('.modal-slide');
-	     	modalSlider.slides = modalSlider.slide.length;
-	     	modalSlider.current = $(modalSlider.slide[modalSlider.index - 1]);
-	     	modalSlider.container = modal.current.find('.modal-slide-container');
-			modalSlider.navControl = modal.current.find('.modal-nav-control');
-
-			if(modal.slider.slides > 1) {
-				modal.current.find('.modal-nav-control').css('display', 'inline');
-			}
-
-			if (modal.current.find('.MMVP-video').length) {
-				modal.videoPlayer.container = modal.current.find('.MMVP-video');
-				modal.videoPlayer.init();
-			}
-
-			// WEB GL PREP
-
-			if (modal.current.find('.modal-model-container').length) {
-
-				modal.slider.loadNextScene = {
-
-					scene: '',
-					controls: '',
-					currentModelPath: '',
-					currentModelCameraPosition: '',
-					currentModelPosition: '',
-
-					init: function() {
-
-						modal.slider.canvas = modal.slider.current.find('.modal-model-container');
-
-						modal.slider.loadNextScene.currentModelPath = modal.slider.canvas.data('model-path');
-
-						modal.slider.loadNextScene.currentModelCameraPosition = modal.slider.canvas.data('camera-position').split(' ');
-
-						modal.slider.loadNextScene.currentModelPosition = modal.slider.canvas.data('model-position').split(' ');
-
-						var canvas, scene, camera, light, spotlightSide, spotlightFront, spotlightBottom, controls, mouse, raycaster, renderer, loader, model, boundingBox;
-
-						canvas = modal.slider.canvas.find('canvas');
-						modal.slider.loadNextScene.scene = new THREE.Scene();
-
-						scene = modal.slider.loadNextScene.scene;
-
-						camera = new THREE.PerspectiveCamera(45, modal.slider.canvas.width() / modal.slider.canvas.height(), 0.1, 10000);
-
-						light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 0.5 );
-						scene.add( light );
-
-						spotlightSide = new THREE.SpotLight( 0xf0f8ff );
-						spotlightSide.position.set( 5, 5, 0 );
-						spotlightSide.castShadow = true;
-						spotlightSide.shadowMapWidth = 1024;
-						spotlightSide.shadowMapHeight = 1024;
-						spotlightSide.shadowCameraNear = 500;
-						spotlightSide.shadowCameraFar = 4000;
-						spotlightSide.shadowCameraFov = 30;
-						spotlightSide.intensity = 5;
-						scene.add( spotlightSide );
-
-						spotlightFront = spotlightSide.clone();
-						spotlightFront.position.set(0, 6, 2);
-						spotlightFront.intensity = 1;
-						scene.add(spotlightFront);
-
-						spotlightBottom = spotlightSide.clone();
-						spotlightBottom.position.set(-8, -2, -4);
-						spotlightBottom.color.setHex( 0x161726 );
-						spotlightBottom.intensity = 5;
-						scene.add(spotlightBottom);
-
-						modal.slider.loadNextScene.controls = new THREE.OrbitControls(camera, modal.slider.canvas[0]);
-						controls = modal.slider.loadNextScene.controls;
-						controls.addEventListener('change', render);
-
-						loader = new THREE.JSONLoader();
-
-						renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas[0], antialias: true});
-						renderer.setSize(modal.slider.canvas.width(), modal.slider.canvas.height());
-
-						function addModel() {
-
-							function stringArrayToNumberArray(theArray) {
-								for(var i in theArray) {
-									theArray[i] = Number(theArray[i]);
-								}
-
-								return theArray;
-							}
-
-							var modelIndex = '',
-								objectPosition = stringArrayToNumberArray(modal.slider.loadNextScene.currentModelPosition),
-								cameraPosition = stringArrayToNumberArray(modal.slider.loadNextScene.currentModelCameraPosition);
-
-							$('.modal-model-container').each(function(index){
-								if ($(this).is(modal.slider.canvas)) {
-									modelIndex = index;
-									return;
-								}
-							});
-
-							var mesh = modal.loadModels.models[modelIndex].mesh,
-								edges = modal.loadModels.models[modelIndex].edges;
-
-							scene.add(mesh);
-							scene.add(edges);
-
-							mesh.position.set(objectPosition[0], objectPosition[1], objectPosition[2]);
-							edges.position.set(objectPosition[0], objectPosition[1], objectPosition[2]);
-
-							boundingBox = new THREE.Box3().setFromObject(mesh);
-							var zoomLimit = Math.max(boundingBox.max.x, boundingBox.max.y, boundingBox.max.z);
-							controls.minDistance = zoomLimit * 1.25;
-							controls.maxDistance = zoomLimit * 5;
-							camera.position.z = zoomLimit * 3;
-
-							camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-							camera.lookAt(new THREE.Vector3(objectPosition[0], objectPosition[1], objectPosition[2]));
-
-							function removeRenderingIndicator() {
-								modal.slider.canvas.find('.webgl-rendering-indicator').removeClass('loading-in-progress');
-								modal.slider.canvas.find('.webgl-rendering-indicator').addClass('loading-done');
-							}
-
-							TweenMax.to(canvas, 1.5, {autoAlpha: 1, ease: Power1.easeIn, delay: 2, onComplete: removeRenderingIndicator});
-
-							animate();
-						}
-
-						function animate() {
-							scene = modal.slider.loadNextScene.scene;
-							controls = modal.slider.loadNextScene.controls;
-
-							if (scene !== null) {
-								controls.update();
-								render();
-							}
-						}
-
-						function render() {
-							renderer.render(modal.slider.loadNextScene.scene, camera);
-						}
-
-						addModel();
-
-						$(window).resize(function(event){
-							var canvasWidth = modal.slider.canvas.width(),
-								canvasHeight = modal.slider.canvas.height();
-							camera.aspect = canvasWidth / canvasHeight;
-							camera.updateProjectionMatrix();
-		    				renderer.setSize(canvasWidth, canvasHeight);
-		    				render();
-						});
-					}
-				};
-
-				if (modalSlider.loadNextScene.init && modal.current.find('.modal-model-container').length) {
-					modalSlider.loadNextScene.init();
-				}
-
-			}
-
-			modal.slider.reset = function() {
-				if (modal.slider.loadNextScene) {
-					modal.slider.loadNextScene.controls.dispose();
-					modal.slider.loadNextScene.controls = null;
-					modal.slider.loadNextScene.scene = null;
-				}
-				modal.slider.index = 1;
-				modal.slider.current = '';
-				modal.slider.slides = '';
-				TweenMax.set(modal.current.find('.modal-slide-container'), {scrollTo: {x: 0}});
-			};
-
-
-	    	modal.current.addClass('is-staged is-visible');
-	    });
-
-	    $('.modal__box').on('click', function(event) {
-	      	event.stopPropagation();
-	    });
-
-	    $('.js-close-modal').on('click', function(event) {
-	      	event.preventDefault();
-	      	modal.closeModal();
-	    });
-
-	},
-
-	closeModal: function() {
-		modal.current.removeClass('is-visible');
-	    window.setTimeout(function(){
-	      	modal.current.removeClass('is-staged');
-	      	modal.slider.reset();
-	      	modal.videoPlayer.reset();
-	    }, 250);
-	},
-
-  	loadModels: {
-
-		canvases: [],
-		loaders: [],
-		models: [],
-		counter: 0,
-
-		init: function() {
-			$('.modal-model-container').each(function(index){
-				modal.loadModels.canvases[index] = $(this);
-				modal.loadModels.loaders[index] = new THREE.JSONLoader();
-				var path = $(this).data('model-path');
-				var loader = modal.loadModels.loaders[index];
-				var callback = function(geometry,material){
-					modal.loadModels.models[index] = {};
-					var mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: '#101010', side: THREE.DoubleSide, emissive: '#000000', specular: '#111111', shininess: 20, shading: THREE.SmoothShading, transparent: true, opacity: 0.8}));
-					var edges = new THREE.EdgesHelper(mesh, 'rgb(200,200,200)');
-					edges.material.transparency = true;
-					edges.material.opacity = 0.8;
-					edges.material.linewidth = 0.15;			
-					mesh.position.set(0,-1,0);
-					mesh.scale.set(0.1,0.1,0.1);
-					modal.loadModels.models[index].mesh = mesh;
-					modal.loadModels.models[index].edges = edges;
-				};
-
-				loader.load(path, callback);
-				modal.loadModels.counter = modal.loadModels.counter++;
-
-				if (modal.loadModels.counter == $('.modal-model-container').length) {
-					//loadingScreen.init();
-				}
-			});
-		}
-
-	},
-
-};
-
 function FifteenFourVideoPlayer(userConfig) {
 
 	var thisPlayer = this,
@@ -593,7 +312,7 @@ function FifteenFourVideoPlayer(userConfig) {
 					volume = 100;
 				}
 				if (thisPlayer.video.muted) {
-					video.muted = false;
+					thisPlayer.video.muted = false;
 					volumeButton.removeClass('MMVP-video-controls-volume-muted');
 				}
 
@@ -629,7 +348,27 @@ function FifteenFourVideoPlayer(userConfig) {
 		},
 
 		init: function() {
-			thisPlayer.container.find('.MMVP-video-controls-volume').on('click', function(){
+
+			function slideVolume() {
+				$(window).on('mousemove.volumeMousemove', function(event){
+					event.preventDefault();
+					var offset = thisPlayer.container.find('.MMVP-volume-slider-container').offset(),
+						top = event.pageY - offset.top,
+						containerHeight = thisPlayer.container.find('.MMVP-volume-slider-container').height();
+
+					if(top > -1 && top < containerHeight) {
+						var newVolumePercentage = Math.floor(99 - ((top / containerHeight) * 100));
+						thisPlayer.volume.changeVolumeSlider(newVolumePercentage);
+					}
+				});
+
+				$(window).on('mouseup.volumeMouseup', function(){
+					$(window).off('mousemove.volumeMousemove');
+					$(window).off('mouseup.volumeMouseup');
+				});
+			}
+
+			thisPlayer.container.find('.MMVP-video-controls-volume').on('mousedown', function(){
 				var currentVol = thisPlayer.video.volume;
 				if (!thisPlayer.video.muted) {
 					thisPlayer.volume.checkVolume(0);
@@ -643,25 +382,7 @@ function FifteenFourVideoPlayer(userConfig) {
 				}
 			});
 
-			thisPlayer.container.find('.MMVP-volume-slider-grabber-interaction').on('mousedown', function(event){
-				$(window).on('mousemove', function(event){
-					event.preventDefault();
-					var offset = thisPlayer.container.find('.MMVP-volume-slider-container').offset(),
-						top = event.pageY - offset.top,
-						containerHeight = thisPlayer.container.find('.MMVP-volume-slider-container').height();
-
-					if(top > -1 && top < containerHeight) {
-						var newVolumePercentage = Math.floor(99 - ((top / containerHeight) * 100));
-						thisPlayer.volume.changeVolumeSlider(newVolumePercentage);
-					}
-				});
-
-				$(window).on('mouseup', function(){
-					$(window).off('mousemove');
-				});
-			});
-
-			thisPlayer.container.find('.MMVP-volume-slider-box').on('click', function(event){
+			thisPlayer.container.find('.MMVP-volume-slider-box').on('mousedown', function(event){
 				event.preventDefault();
 				var offset = thisPlayer.container.find('.MMVP-volume-slider-container').offset(),
 					top = event.pageY - offset.top,
@@ -676,6 +397,7 @@ function FifteenFourVideoPlayer(userConfig) {
 				else if (top >= containerHeight) {
 					thisPlayer.volume.changeVolumeSlider(0);
 				}
+				slideVolume();
 			});	
 
 			thisPlayer.container.find('.MMVP-video-controls').on({
@@ -684,7 +406,6 @@ function FifteenFourVideoPlayer(userConfig) {
 					window.clearTimeout(thisPlayer.autoHideControls.inactivityTimeout);
 				},
 				mousemove: function(event) {
-					event.stopPropagation();
 					if (thisPlayer.autoHideControls.inactivityTimeout) {
 						window.clearInterval(thisPlayer.autoHideControls.activityCheck);
 						window.clearTimeout(thisPlayer.autoHideControls.inactivityTimeout);
@@ -844,11 +565,10 @@ function FifteenFourVideoPlayer(userConfig) {
 
 	this.reset = function() {
 		if (thisPlayer.video) {
-			$(window).off('mouseup');
 			thisPlayer.video.pause();
 			thisPlayer.container.find('.MMVP-video-progress-grabber-interaction').off('mousedown');
 			thisPlayer.container.find('.MMVP-video-progress-bar-interaction').off('mousedown');
-			thisPlayer.container.find('.MMVP-volume-slider-container').off('click');
+			thisPlayer.container.find('.MMVP-volume-slider-box').off('mousedown');
 			thisPlayer.container.find('.MMVP-video-controls').off('mouseenter mousemove mouseleave');
 			thisPlayer.container.find('.MMVP-video-controls-volume').off('click');
 			thisPlayer.container.find('.MMVP-video-controls-play-pause').off('click');
@@ -866,6 +586,295 @@ function FifteenFourVideoPlayer(userConfig) {
 		}
 	};
 }
+
+
+// ====================================================//
+// ==========   MAIN OBJECTS   ========================//
+// ====================================================//
+
+var slider = new Area15Slider({name: 'Main Slider', hasProgress: true});
+
+var modal = {
+
+	current: '',
+
+	init: function() {
+
+		// LOAD ALL WEBGL MODELS
+
+		modal.loadModels.init();
+
+		// SET UP MODAL SLIDER OBJECT
+
+		var modalSlider = new Area15Slider({
+	     		name: 'Modal Slider',
+	     		navControl: $('.modal-nav-control'),
+				slideTime: 0.8
+		});
+
+		modal.slider = modalSlider;
+		modal.slider.init();
+		
+
+		// LAUNCH MODAL & UPDATE VARS
+
+	    $('.js-modal').on('click', function(event) {
+
+	     	event.preventDefault();
+
+	     	modal.current = $($(this).data('target'));
+
+	     	modalSlider.slide = modal.current.find('.modal-slide');
+	     	modalSlider.slides = modalSlider.slide.length;
+	     	modalSlider.current = $(modalSlider.slide[modalSlider.index - 1]);
+	     	modalSlider.container = modal.current.find('.modal-slide-container');
+			modalSlider.navControl = modal.current.find('.modal-nav-control');
+
+			if(modal.slider.slides > 1) {
+				modal.current.find('.modal-nav-control').css('display', 'inline');
+			}
+
+			// SET UP MODAL VIDEO PLAYER OBJECT
+
+			if (modal.current.find('.MMVP-video').length) {
+				var modalVideoPlayer = new FifteenFourVideoPlayer({
+						name: 'Modal Video Player'
+				});
+				modal.videoPlayer = modalVideoPlayer;
+				modal.videoPlayer.container = modal.current.find('.MMVP-video');
+				modal.videoPlayer.init();
+			}
+
+			// WEB GL PREP
+
+			if (modal.current.find('.modal-model-container').length) {
+
+				modal.slider.loadNextScene = {
+
+					scene: '',
+					controls: '',
+					currentModelPath: '',
+					currentModelCameraPosition: '',
+					currentModelPosition: '',
+
+					init: function() {
+
+						modal.slider.canvas = modal.slider.current.find('.modal-model-container');
+
+						modal.slider.loadNextScene.currentModelPath = modal.slider.canvas.data('model-path');
+
+						modal.slider.loadNextScene.currentModelCameraPosition = modal.slider.canvas.data('camera-position').split(' ');
+
+						modal.slider.loadNextScene.currentModelPosition = modal.slider.canvas.data('model-position').split(' ');
+
+						var canvas, scene, camera, light, spotlightSide, spotlightFront, spotlightBottom, controls, mouse, raycaster, renderer, loader, model, boundingBox;
+
+						canvas = modal.slider.canvas.find('canvas');
+						modal.slider.loadNextScene.scene = new THREE.Scene();
+
+						scene = modal.slider.loadNextScene.scene;
+
+						camera = new THREE.PerspectiveCamera(45, modal.slider.canvas.width() / modal.slider.canvas.height(), 0.1, 10000);
+
+						light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 0.5 );
+						scene.add( light );
+
+						spotlightSide = new THREE.SpotLight( 0xf0f8ff );
+						spotlightSide.position.set( 5, 5, 0 );
+						spotlightSide.castShadow = true;
+						spotlightSide.shadowMapWidth = 1024;
+						spotlightSide.shadowMapHeight = 1024;
+						spotlightSide.shadowCameraNear = 500;
+						spotlightSide.shadowCameraFar = 4000;
+						spotlightSide.shadowCameraFov = 30;
+						spotlightSide.intensity = 5;
+						scene.add( spotlightSide );
+
+						spotlightFront = spotlightSide.clone();
+						spotlightFront.position.set(0, 6, 2);
+						spotlightFront.intensity = 1;
+						scene.add(spotlightFront);
+
+						spotlightBottom = spotlightSide.clone();
+						spotlightBottom.position.set(-8, -2, -4);
+						spotlightBottom.color.setHex( 0x161726 );
+						spotlightBottom.intensity = 5;
+						scene.add(spotlightBottom);
+
+						modal.slider.loadNextScene.controls = new THREE.OrbitControls(camera, modal.slider.canvas[0]);
+						controls = modal.slider.loadNextScene.controls;
+						controls.addEventListener('change', render);
+
+						loader = new THREE.JSONLoader();
+
+						renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas[0], antialias: true});
+						renderer.setSize(modal.slider.canvas.width(), modal.slider.canvas.height());
+
+						function addModel() {
+
+							function stringArrayToNumberArray(theArray) {
+								for(var i in theArray) {
+									theArray[i] = Number(theArray[i]);
+								}
+
+								return theArray;
+							}
+
+							var modelIndex = '',
+								objectPosition = stringArrayToNumberArray(modal.slider.loadNextScene.currentModelPosition),
+								cameraPosition = stringArrayToNumberArray(modal.slider.loadNextScene.currentModelCameraPosition);
+
+							$('.modal-model-container').each(function(index){
+								if ($(this).is(modal.slider.canvas)) {
+									modelIndex = index;
+									return;
+								}
+							});
+
+							var mesh = modal.loadModels.models[modelIndex].mesh,
+								edges = modal.loadModels.models[modelIndex].edges;
+
+							scene.add(mesh);
+							scene.add(edges);
+
+							mesh.position.set(objectPosition[0], objectPosition[1], objectPosition[2]);
+							edges.position.set(objectPosition[0], objectPosition[1], objectPosition[2]);
+
+							boundingBox = new THREE.Box3().setFromObject(mesh);
+							var zoomLimit = Math.max(boundingBox.max.x, boundingBox.max.y, boundingBox.max.z);
+							controls.minDistance = zoomLimit * 1.25;
+							controls.maxDistance = zoomLimit * 5;
+							camera.position.z = zoomLimit * 3;
+
+							camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
+							camera.lookAt(new THREE.Vector3(objectPosition[0], objectPosition[1], objectPosition[2]));
+
+							function removeRenderingIndicator() {
+								modal.slider.canvas.find('.webgl-rendering-indicator').removeClass('loading-in-progress');
+								modal.slider.canvas.find('.webgl-rendering-indicator').addClass('loading-done');
+							}
+
+							TweenMax.to(canvas, 1.5, {autoAlpha: 1, ease: Power1.easeIn, delay: 2, onComplete: removeRenderingIndicator});
+
+							animate();
+						}
+
+						function animate() {
+							scene = modal.slider.loadNextScene.scene;
+							controls = modal.slider.loadNextScene.controls;
+
+							if (scene !== null) {
+								controls.update();
+								render();
+							}
+						}
+
+						function render() {
+							renderer.render(modal.slider.loadNextScene.scene, camera);
+						}
+
+						addModel();
+
+						$(window).on('resize.webGLResize', function(event){
+							var canvasWidth = modal.slider.canvas.width(),
+								canvasHeight = modal.slider.canvas.height();
+							camera.aspect = canvasWidth / canvasHeight;
+							camera.updateProjectionMatrix();
+		    				renderer.setSize(canvasWidth, canvasHeight);
+		    				render();
+						});
+					}
+				};
+
+				if (modalSlider.loadNextScene.init && modal.current.find('.modal-model-container').length) {
+					modalSlider.loadNextScene.init();
+				}
+
+			}
+
+			modal.slider.reset = function() {
+				if (modal.slider.loadNextScene) {
+					modal.slider.loadNextScene.controls.dispose();
+					modal.slider.loadNextScene.controls = null;
+					modal.slider.loadNextScene.scene = null;
+					$(window).off('resize.webGLResize');
+				}
+				modal.slider.index = 1;
+				modal.slider.current = '';
+				modal.slider.slides = '';
+				TweenMax.set(modal.current.find('.modal-slide-container'), {scrollTo: {x: 0}});
+			};
+
+
+	    	modal.current.addClass('is-staged is-visible');
+	    });
+
+	    $('.modal__box').on('click', function(event) {
+	      	event.stopPropagation();
+	    });
+
+	    $('.js-close-modal').on('click', function(event) {
+	      	event.preventDefault();
+	      	modal.closeModal();
+	    });
+
+	},
+
+	closeModal: function() {
+		modal.current.removeClass('is-visible');
+	    window.setTimeout(function(){
+	      	modal.current.removeClass('is-staged');
+	      	modal.slider.reset();
+	      	if (modal.videoPlayer) {
+	      		modal.videoPlayer.reset();
+	      	}
+	    }, 250);
+	},
+
+  	loadModels: {
+
+		canvases: [],
+		loaders: [],
+		models: [],
+		counter: 0,
+
+		init: function() {
+			$('.modal-model-container').each(function(index){
+				modal.loadModels.canvases[index] = $(this);
+				modal.loadModels.loaders[index] = new THREE.JSONLoader();
+				var path = $(this).data('model-path');
+				var loader = modal.loadModels.loaders[index];
+				var callback = function(geometry,material){
+					modal.loadModels.models[index] = {};
+					var mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: '#101010', side: THREE.DoubleSide, emissive: '#000000', specular: '#111111', shininess: 20, shading: THREE.SmoothShading, transparent: true, opacity: 0.8}));
+					var edges = new THREE.EdgesHelper(mesh, 'rgb(200,200,200)');
+					edges.material.transparency = true;
+					edges.material.opacity = 0.8;
+					edges.material.linewidth = 0.15;			
+					mesh.position.set(0,-1,0);
+					mesh.scale.set(0.1,0.1,0.1);
+					modal.loadModels.models[index].mesh = mesh;
+					modal.loadModels.models[index].edges = edges;
+				};
+
+				loader.load(path, callback);
+				modal.loadModels.counter = modal.loadModels.counter++;
+
+				if (modal.loadModels.counter == $('.modal-model-container').length) {
+					//loadingScreen.init();
+				}
+			});
+		}
+
+	},
+
+};
+
+
+// ====================================================//
+// ==========   UTILITY FUNCTIONS   ===================//
+// ====================================================//
+
 
 var uiActiveStates = {
 
@@ -935,33 +944,119 @@ var tooltips = {
 
 	title: '',
 
-	computeMousePosition: function(pageX, pageY) {
-		var mouseLeft = pageX - 0;
-		var mouseTop = pageY - 0;
-
-		tooltips.mousePos.x = mouseLeft;
-		tooltips.mousePos.y = mouseTop;
-	},
-
 	init: function() {
-		$('.js-tooltip').hover(
-			function(event) {
+		$('.js-tooltip').on({
+			mouseenter: function(){
 				tooltips.current = $(this);
 				tooltips.title = tooltips.current.data('title');
 				$('.tooltip-text').html(tooltips.title);
-				$('.tooltip-text').addClass('tooltip-reveal');
-				TweenMax.to('.tooltip', 0.35, {autoAlpha: 1});
-
+				$('.tooltip').addClass('tooltip-reveal');
 			},
-			function(event) {
-				$('.tooltip-text').removeClass('tooltip-reveal');
-				TweenMax.to('.tooltip', 0.35, {autoAlpha: 0});
+			mousemove: function(){
+				var pageX = event.pageX,
+					pageY = event.pageY;
+				$('.tooltip').css({'left': pageX - 15, 'top': pageY - 20});
+			},
+			mouseleave: function(){
+				$('.tooltip').removeClass('tooltip-reveal');
+			}
 		});
+	}
+};
 
-		$('.js-tooltip').on('mousemove', function(event) {
-			var pageX = event.pageX;
-			var pageY = event.pageY;
-			$('.tooltip').css({'left': pageX, 'top': pageY - 25});
+var magnifyingGlass = {
+
+	glassSize: 200,
+
+	currentImage: '',
+
+	smallImageWidth: '',
+
+	smallImageHeight: '',
+
+	largeImageObject: {
+		image: '',
+		width: '',
+		height:''
+	},
+
+	mousePos: {
+		x: '',
+		y: ''
+	},
+
+	isVisible: false,
+
+	init: function() {
+
+		var magnifyingGlassDiv = $('.magnifying-glass');
+			magnifyingGlassDivInternal = $('.magnifying-glass-internal');
+
+		function centerToMouse(){
+			var offset = magnifyingGlass.current.offset(),
+				pageX = magnifyingGlass.mousePos.x,
+				pageY = magnifyingGlass.mousePos.y,
+				proportionX = (pageX - offset.left) * (magnifyingGlass.largeImageObject.width / magnifyingGlass.smallImageWidth * -1) + (magnifyingGlass.glassSize / 2),
+				proportionY = (pageY - offset.top) * (magnifyingGlass.largeImageObject.height / magnifyingGlass.smallImageHeight * -1) + (magnifyingGlass.glassSize / 2);
+
+			magnifyingGlassDiv.css({'left': pageX - (magnifyingGlass.glassSize / 2), 'top': pageY - (magnifyingGlass.glassSize / 2)});
+			magnifyingGlassDivInternal.css('transform', 'translate3d(' + proportionX + 'px, ' + proportionY + 'px, .0001px)');
+		}
+
+		$('.js-magnify').on({
+			mouseenter: function(){
+
+				$(window).on('mousewheel.magnifyingGlassWheel', function(event){
+
+					var delta = event.originalEvent.wheelDelta,
+						wheelDeltaModifier = Math.ceil(Math.round(delta / 8));
+						newGlassSize = Math.min(Math.max(magnifyingGlass.glassSize += wheelDeltaModifier, 150), 400);
+
+					magnifyingGlassDiv.css({
+						width: newGlassSize,
+						height: newGlassSize
+					});
+
+					magnifyingGlass.glassSize = newGlassSize;
+					centerToMouse();
+				});
+
+				magnifyingGlass.current = $(this);
+				magnifyingGlass.smallImageWidth = magnifyingGlass.current.width();
+				magnifyingGlass.smallImageHeight = magnifyingGlass.current.height();				
+				magnifyingGlass.largeImageObject.image = new Image();
+
+				var src = magnifyingGlass.current[0].src;
+
+				magnifyingGlass.largeImageObject.image.src = src;
+				magnifyingGlass.largeImageObject.width = magnifyingGlass.largeImageObject.image.width;
+				magnifyingGlass.largeImageObject.height = magnifyingGlass.largeImageObject.image.height;
+
+				magnifyingGlassDivInternal.css({
+					width: magnifyingGlass.largeImageObject.width + 'px',
+					height: magnifyingGlass.largeImageObject.height + 'px',
+					backgroundImage: 'url(' + src + ')'
+				});
+
+				//magnifyingGlassDiv.css('background-image', 'url(' + src + ')');
+				magnifyingGlassDiv.addClass('magnifying-glass-reveal');
+			},
+			mousemove: function(){
+
+				if (!magnifyingGlass.isVisible){
+					magnifyingGlassDiv.addClass('magnifying-glass-reveal');
+					magnifyingGlass.isVisible = true;
+				}
+
+				magnifyingGlass.mousePos.x = event.pageX;
+				magnifyingGlass.mousePos.y = event.pageY;
+
+				centerToMouse();				
+			},
+			mouseleave: function(){
+				$(window).off('mousewheel.magnifyingGlassWheel');
+				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
+			}
 		});
 	}
 };
@@ -1009,7 +1104,7 @@ var dynamicImageLoad = {
 $(document).ready(function(event){
 
 	dynamicImageLoad.init();
-	loadingScreen.init();
+	//loadingScreen.init();
 
 });
 
@@ -1022,6 +1117,7 @@ $(window).load(function(event){
 	modal.init();
 	uiActiveStates.init();
 	tooltips.init();
+	magnifyingGlass.init();
 
 });
 

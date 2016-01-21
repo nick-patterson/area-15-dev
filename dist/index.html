@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>Area 15 | Table Prototype | Steampunk</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="styles/styles.min.css" type="text/css">
 
 </head>
@@ -17,7 +18,7 @@
 		<div class="slider-inner-container">
 
 			<div class="slide slide-1">
-				<div data-title="Bodie Flyer" class="artifact by-height ui-border js-tooltip bodie-flyer vertical-align">
+				<div data-title="Bodie Flyer" class="artifact by-height js-tooltip ui-border bodie-flyer vertical-align">
 					<img data-target="#flyer-modal" class="js-modal" high-res-src="img/steampunk-room/bodie-flyer.png">
 				</div>
 				
@@ -119,11 +120,11 @@
 		<img class="gilding" high-res-src="steampunk-room-ui/player/gilding.png">
 	</div>
 
-	<!-- Tooltips -->
 
+	<!-- Tooltips -->
 	
 	<div class="tooltip">
-		<div class="tooltip-magnifying-glass">
+		<div class="magnifying-glass-icon">
 			<svg width="100%" height="100%">
 				<circle cx="43%" cy="43%" r="35%"/>
 				<line x1="65%" y1="65%" x2="100%" y2="100%"/>
@@ -131,6 +132,21 @@
 		</div>
 		<div class="tooltip-text">
 			&nbsp;
+		</div>
+	</div>
+
+	<!-- Magnifying Glass -->
+	
+	<div class="magnifying-glass">
+		<div class="magnifying-glass-internal-container">
+			<div class="magnifying-glass-internal">
+			</div>
+		</div>
+		<div class="magnifying-glass-icon">
+			<svg width="100%" height="100%">
+				<circle cx="43%" cy="43%" r="35%"/>
+				<line x1="65%" y1="65%" x2="100%" y2="100%"/>
+			</svg>
 		</div>
 	</div>
 
@@ -144,13 +160,13 @@
 				<div class="modal-slide-inner-container">
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/bodie-flyer.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/bodie-flyer.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Bodie Flyer</h2>
 								<p class="modal-artifact-description">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+									This flyer promoted a guide service help gold prospectors who were moving to Bodie, California in 1880. Huge amounts of people with almost no practical experience flooded the area hoping to get rich quick.
 								</p>
 							</div>
 						</div>
@@ -186,52 +202,55 @@
 				<div class="modal-slide-inner-container">
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/newspaper.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/newspaper.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
-							<h2 class="modal-artifact-title">The Pioneer Journal</h2>
+							<h2 class="modal-artifact-title">The Pioneer Journal of Mono County</h2>
 								<p class="modal-artifact-description">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+									This issue has three articles pertaining to general interest in Bodie, California and the surrounding areas of Mono County. One article among the three directly addresses the mystery of the quest for Amazing.
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/article-1.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/article-1.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
-							<h2 class="modal-artifact-title">Article No. 1</h2>
+							<h2 class="modal-artifact-title">Article No.1</h2>
 								<p class="modal-artifact-description">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+									<!--The majority of this article is faded beyond legibility. Blah blah blah, now, we're just talking out of our asses.-->
+									Remember the great hog fever of 1879, that pestilence which took but four of the Stevenson clan’s hogs before the rightful time on this earth was come? Well, something akin to that has taken Mano County by storm this week. Call it “Holiday Shopping Fever.” Bodie may not be Philadelphia or Manhattan Island, but Burt’s General has done a pretty share of business to ranchers and other goodly folk who wish to have a nice Christmas. “It seems to come earlier every year,” Burt said of the extra oats, berries, barley milk, and tonics that have been selling the past week. “Getting to be that folk don’t even wait for Christmas Eve before carting into town for one of my red and white candied canes.” Not everyone is so glad to feel the heat of this fever. Ma Perkins, widow to Bodie founding father Ebenezer Perkins, cautioned against the imprudence of the young ‘shoppers.’“It ain’t right,” said Ma Perkins to the Journal yesterday.
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/article-2.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/article-2.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Article No. 2</h2>
 								<p class="modal-artifact-description">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+									<!--The majority of this article is faded beyond legibility. Blah blah blah, now, we're just talking out of our asses.-->
+									Now, I know how the young folk feel whenever they see a big black train charging across the countryside and belching its smoke all over creation. They get all worked up, just as my Jesse did when he was 25 and saw him his first young female. But I’ll tell you right now, I didn’t live to the age of 50 with- out learning a thing or two about this world of ours. You can’t take a horse off a carriage and make it go without employing some kind of devilry. “But it move so quick, Ma” says my Jesse. So do wickedness as it spread through a saloon on a bedarkened summer night. “It don’t need to be fed,” says my Jesse. Neither do a wicked spirit need to be fed wickedness - it just live on and grow without any provocation - and if that ain’t the honest truth then strike me dead. If the smoke and the forsaken racket aren’t enough to turn an honest woman to tartery, it’s the mere fact of these Eastern folk coming here chasing gold the way a coyote chase a jack rabbit. Would that Pa Perkins saw these young folk riding that forsaken contraption into town and looking for gold, he’d rightly turn in his grave!
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/article-3.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/article-3.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Article No. 3</h2>
 								<p class="modal-artifact-description">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor molestie nunc mattis pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut placerat ex. Vestibulum tempor, ex eget commodo placerat, risus nibh gravida ex, sed auctor orci tellus sit amet eros. Proin a dolor risus. Cras non gravida velit.
+									<!--The majority of this article is faded beyond legibility. Blah blah blah, now, we're just talking out of our asses.-->
+									For those of us to whom the proper town of Bodie, California has been their only home, strange folk have been a common site to be seen these last few years. What with the gold rush going on, we bear witness to so many folk coming through these parts as it can be rightfully hard to remember all their names. But one man has been spotted who is perchance behaving more strangely than all the other souls we have beholden here of late. We all may take him to be a prospector of gold like so many others, but that he does not seem in pursuit of that goodly treasure, but of something else on this earth. He is not to be seen without the oddest and most beguiling of all contraptions that I have yet seen. That it measure something it can be truthful- ly told, but what substance it measure cannot be said by any of this town’s rightful citizens. Nor can I explain why he be surround by an even stranger group of folk who don’t even venture to talk to nobody but him. When this fair reporter asked the strange man what strange thing he be pursuing, he told me plain: “The Mazmen and me - we ain’t searching for what them others is searching for.” I then ventured to ask as to who the Mazmen might be, and just what the rightful purpose of this measuring contraption might be, and what it IS that he be searching, but my labors would bear no more fruit: the strange man went right on with his strange business and strange companions, and was silent henceforth.
 								</p>
 							</div>
 						</div>
@@ -267,39 +286,39 @@
 				<div class="modal-slide-inner-container">
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/sc-reactor.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/sc-reactor.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Superconducting Reactor</h2>
 								<p class="modal-artifact-description">
-									A faded description in the bottom right corner reads: The SUPERCONDUCTING REACTOR utilizes the centripedal force generated by a rapidly rotating plutonium core in order to recycle its expelled neutrons back towards the core itself, allowing for a much higher reaction yield in a much smaller time than with previous designs. The tungsten rotating shell transfers the nuclear energy into kinetic energy that generates an electromagnetic field inside of a motor encased by supercooled, superconducting metallic hydrogen compounds.
+									A faded description in the bottom right corner details how the device functions: Device utilizes the centripedal force generated by a rapidly rotating plutonium core in order to recycle its expelled neutrons back towards the core itself, allowing for a much higher reaction yield in a much smaller time than with previous designs. The tungsten rotating shell transfers the nuclear energy into kinetic energy that generates an electromagnetic field inside of a motor encased by supercooled, superconducting metallic hydrogen compounds.
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/brainwave-specs.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/brainwave-specs.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Brainwave Mapping Spectacles</h2>
 								<p class="modal-artifact-description">
-									The BRAINWAVE MAPPING SPECTACLES utilize piezoelectric silicon sensors and actuators combined with highly attuned enriched magnesium and gallium flux receptors to capture and record changes in magnetic flux, electromagnetic field, skin temperature, skin moisture content, air and skin salinity, and mecahnical vibration of the specimen wearing the device. The gathered information is processed by the DUTRA-MIND algorithm and is translated from raw input data into comprehensible language and imagery.
+									Device utilizes piezoelectric silicon sensors and actuators combined with highly attuned enriched magnesium and gallium flux receptors to capture and record changes in magnetic flux, electromagnetic field, skin temperature, skin moisture content, air and skin salinity, and mecahnical vibration of the specimen wearing the device. The gathered information is processed by the DUTRA-MIND algorithm and is translated from raw input data into comprehensible language and imagery.
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-slide">
 						<div class="modal-image-container">
-							<img class="modal-image" high-res-src="img/steampunk-room/donut-gun.png">
+							<img class="modal-image js-magnify" high-res-src="img/steampunk-room/donut-gun.png">
 						</div>
 						<div class="modal-text-container">
 							<div class="modal-text">
 							<h2 class="modal-artifact-title">Mobile Satisfaction Injector</h2>
 								<p class="modal-artifact-description">
-									The MOBILE SATISFACTION INJECTOR features an array of reloadable magazines that carry concentrated ingredients from each of the protein, carbohydrate, and lipid families of organic macromolecules. These raw ingredients are sent via sterile teflon tubing to a mixing hub driven by a platinum-caesium catalyst. The mixed compounds are then ejected from the barrel of the device and allowed to react with the atmosphere to cool and solidify into their chosen final form, usually donuts. Why? Because donuts.
+									Device features an array of reloadable magazines that carry concentrated ingredients from each of the protein, carbohydrate, and lipid families of organic macromolecules. These raw ingredients are sent via sterile teflon tubing to a mixing hub driven by a platinum-caesium catalyst. The mixed compounds are then ejected from the barrel of the device and allowed to react with the atmosphere to cool and solidify into their chosen final form, usually donuts. Why? Because donuts.
 								</p>
 							</div>
 						</div>
@@ -381,7 +400,7 @@
 
 	<!-- LOADING MODAL -->
 
-	<div class="modal utility-modal is-staged is-visible loading-screen">
+	<div class="modal utility-modal loading-screen">
 		<div class="modal__box">
 			<svg class="utility-screen-logo loading-screen-logo loading-in-progress" viewBox="0 0 60.8 53.1">
 				<g>

@@ -411,26 +411,14 @@ body {
   visibility: hidden;
 }
 
-.js-tooltip:hover {
+.js-tooltip:hover, .js-magnify:hover {
   cursor: none;
 }
-.js-tooltip *:hover {
+.js-tooltip *:hover, .js-magnify *:hover {
   cursor: none;
 }
 
-.tooltip {
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  white-space: nowrap;
-}
-.tooltip.hover {
-  cursor: none;
-}
-.tooltip .tooltip-magnifying-glass {
+.magnifying-glass-icon {
   position: relative;
   width: auto;
   height: 15px;
@@ -443,14 +431,29 @@ body {
   padding: 7px;
   background: black;
 }
-.tooltip .tooltip-magnifying-glass svg circle {
+.magnifying-glass-icon svg circle {
   fill: none;
   stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 2.5;
+  stroke-width: 2;
 }
-.tooltip .tooltip-magnifying-glass svg line {
+.magnifying-glass-icon svg line {
   stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 2.5;
+  stroke-width: 2;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  white-space: nowrap;
+  -webkit-transition: visibility .25s, opacity .25s;
+     -moz-transition: visibility .25s, opacity .25s;
+       -o-transition: visibility .25s, opacity .25s;
+          transition: visibility .25s, opacity .25s;
+}
+.tooltip.hover {
+  cursor: none;
 }
 .tooltip .tooltip-text {
   text-transform: uppercase;
@@ -471,8 +474,81 @@ body {
        -o-transition: max-width 1s ease-out;
           transition: max-width 1s ease-out;
 }
-.tooltip .tooltip-reveal {
+.tooltip.tooltip-reveal {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip.tooltip-reveal .tooltip-text {
   max-width: 220px;
+}
+
+.magnifying-glass {
+  position: fixed;
+  z-index: 99;
+  width: 200px;
+  height: 200px;
+  -webkit-transform: scale(0, 0);
+     -moz-transform: scale(0, 0);
+      -ms-transform: scale(0, 0);
+       -o-transform: scale(0, 0);
+          transform: scale(0, 0);
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.65);
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: visibility .15s, opacity .15s, -webkit-transform .15s;
+     -moz-transition: visibility .15s, opacity .15s, -moz-transform .15s;
+       -o-transition: visibility .15s, opacity .15s, -o-transform .15s;
+          transition: visibility .15s, opacity .15s, transform .15s;
+}
+.magnifying-glass:before {
+  z-index: 99;
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid white;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.magnifying-glass .magnifying-glass-internal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+}
+.magnifying-glass .magnifying-glass-internal-container .magnifying-glass-internal {
+  z-index: 98;
+  position: absolute;
+  background: url("../img/steampunk-room/bodie-flyer.png");
+}
+.magnifying-glass.magnifying-glass-reveal {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1, 1);
+     -moz-transform: scale(1, 1);
+      -ms-transform: scale(1, 1);
+       -o-transform: scale(1, 1);
+          transform: scale(1, 1);
+}
+.magnifying-glass .magnifying-glass-icon {
+  z-index: 99;
+  position: absolute;
+  top: 48%;
+  right: -15px;
 }
 
 .text-bold {
@@ -800,7 +876,7 @@ body {
           transition: 0.2s;
 }
 .modal.is-staged {
-  z-index: 1000;
+  z-index: 10;
   visibility: visible;
 }
 .modal.is-visible {
@@ -1265,7 +1341,7 @@ body {
   height: 100%;
 }
 .modal .modal-image-container {
-  max-width: 68%;
+  max-width: 65%;
   height: 100%;
   vertical-align: middle;
   display: inline-block;
@@ -1297,7 +1373,7 @@ body {
           transform: translate(0, -50%);
 }
 .modal .modal-model-container {
-  width: 68%;
+  width: 65%;
   height: 100%;
   vertical-align: middle;
   display: inline-block;
@@ -1341,14 +1417,16 @@ body {
   cursor: grabbing;
 }
 .modal .modal-text-container {
-  width: 30%;
+  position: relative;
+  width: 33%;
+  max-height: 80%;
   text-align: left;
   display: inline-block;
   vertical-align: middle;
   position: relative;
   white-space: normal;
   padding-right: 1.5em;
-  overflow: hidden;
+  overflow: auto;
 }
 .modal .modal-text-container .modal-text {
   color: white;
@@ -1369,14 +1447,15 @@ body {
   left: 0;
 }
 .modal .modal-text-container .modal-text .modal-artifact-description {
+  font-family: 'Roboto';
   padding-left: 2em;
-  line-height: 1.8em;
+  line-height: 1.5em;
   font-weight: 300;
-  font-size: .8em;
+  font-size: .82em;
+  letter-spacing: .035em;
 }
 
 .modal.utility-modal {
-  z-index: 10000;
   width: 100%;
   height: 100%;
 }
