@@ -946,18 +946,18 @@ var tooltips = {
 
 	init: function() {
 		$('.js-tooltip').on({
-			mouseenter: function(){
+			mouseenter: function(event){
 				tooltips.current = $(this);
 				tooltips.title = tooltips.current.data('title');
 				$('.tooltip-text').html(tooltips.title);
 				$('.tooltip').addClass('tooltip-reveal');
 			},
-			mousemove: function(){
+			mousemove: function(event){
 				var pageX = event.pageX,
 					pageY = event.pageY;
 				$('.tooltip').css({'left': pageX - 15, 'top': pageY - 20});
 			},
-			mouseleave: function(){
+			mouseleave: function(event){
 				$('.tooltip').removeClass('tooltip-reveal');
 			}
 		});
@@ -1000,17 +1000,23 @@ var magnifyingGlass = {
 				proportionY = (pageY - offset.top) * (magnifyingGlass.largeImageObject.height / magnifyingGlass.smallImageHeight * -1) + (magnifyingGlass.glassSize / 2);
 
 			magnifyingGlassDiv.css({'left': pageX - (magnifyingGlass.glassSize / 2), 'top': pageY - (magnifyingGlass.glassSize / 2)});
-			magnifyingGlassDivInternal.css('transform', 'translate3d(' + proportionX + 'px, ' + proportionY + 'px, .0001px)');
+			magnifyingGlassDivInternal.css('transform', 'translate3d(' + proportionX + 'px, ' + proportionY + 'px, 0px)');
 		}
 
 		$('.js-magnify').on({
 			mouseenter: function(){
 
-				$(window).on('mousewheel.magnifyingGlassWheel', function(event){
+				$(window).on('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel', function(event){
 
 					var delta = event.originalEvent.wheelDelta,
-						wheelDeltaModifier = Math.ceil(Math.round(delta / 8));
-						newGlassSize = Math.min(Math.max(magnifyingGlass.glassSize += wheelDeltaModifier, 150), 400);
+						wheelDeltaModifier = delta / 8;
+
+					if (event.detail) {
+						delta = event.detail * -1;
+						wheelDeltaModifier = delta * 2;
+					}
+
+					var newGlassSize = Math.min(Math.max(magnifyingGlass.glassSize += wheelDeltaModifier, 150), 400);
 
 					magnifyingGlassDiv.css({
 						width: newGlassSize,
@@ -1019,6 +1025,17 @@ var magnifyingGlass = {
 
 					magnifyingGlass.glassSize = newGlassSize;
 					centerToMouse();
+
+					/*var maxBlur = Math.min(Math.max(wheelDeltaModifier, 0), 7);
+
+					magnifyingGlassDivInternal.css({
+						'filter': 'blur(' + maxBlur + 'px)',
+						'-moz-ilter': 'blur(' + maxBlur + 'px)',
+						'-webkit-filter': 'blur(' + maxBlur + 'px)',
+						'-o-filter': 'blur(' + maxBlur + 'px)',
+						'-ms-filter': 'blur(' + maxBlur + 'px)',
+					});*/
+				
 				});
 
 				magnifyingGlass.current = $(this);
@@ -1035,13 +1052,13 @@ var magnifyingGlass = {
 				magnifyingGlassDivInternal.css({
 					width: magnifyingGlass.largeImageObject.width + 'px',
 					height: magnifyingGlass.largeImageObject.height + 'px',
-					backgroundImage: 'url(' + src + ')'
+					backgroundImage: 'url(' + src + ')',
 				});
 
 				//magnifyingGlassDiv.css('background-image', 'url(' + src + ')');
 				magnifyingGlassDiv.addClass('magnifying-glass-reveal');
 			},
-			mousemove: function(){
+			mousemove: function(event){
 
 				if (!magnifyingGlass.isVisible){
 					magnifyingGlassDiv.addClass('magnifying-glass-reveal');
@@ -1053,8 +1070,8 @@ var magnifyingGlass = {
 
 				centerToMouse();				
 			},
-			mouseleave: function(){
-				$(window).off('mousewheel.magnifyingGlassWheel');
+			mouseleave: function(event){
+				$(window).off('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel');
 				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
 			}
 		});

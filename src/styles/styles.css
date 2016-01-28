@@ -534,6 +534,8 @@ body {
   z-index: 98;
   position: absolute;
   background: url("../img/steampunk-room/bodie-flyer.png");
+  -webkit-filter: blur(0px);
+          filter: blur(0px);
 }
 .magnifying-glass.magnifying-glass-reveal {
   opacity: 1;
