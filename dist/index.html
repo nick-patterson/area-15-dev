@@ -135,12 +135,50 @@
 		</div>
 	</div>
 
-	<!-- Magnifying Glass -->
+	<!-- Magnifying Glass 
 	
 	<div class="magnifying-glass">
 		<div class="magnifying-glass-internal-container">
 			<div class="magnifying-glass-internal">
 			</div>
+		</div>
+		<div class="magnifying-glass-icon">
+			<svg width="100%" height="100%">
+				<circle cx="43%" cy="43%" r="35%"/>
+				<line x1="65%" y1="65%" x2="100%" y2="100%"/>
+			</svg>
+		</div>
+	</div> -->
+
+	<!-- Magnifying Glass -->
+	
+	<div class="magnifying-glass">
+		<div class="magnifying-glass-reticle">
+			<svg width="100%" height="100%">
+				<clipPath id="inner-clip">
+					<circle r="100" cx="50%" cy="50%"/>
+				</clipPath>
+				<clipPath id="outer-clip">
+					<circle r="102" cx="50%" cy="50%"/>
+				</clipPath>
+				<circle id="outer-scope" r="108" cx="50%" cy="50%"/>
+			</svg>
+			<div class="magnifying-glass-border">
+			</div>
+			<div class="magnifying-glass-image-container">
+				<div class="magnifying-glass-image">
+				</div>
+			</div>
+			<svg id="sights" width="100%" height="100%">
+				<!--<line x1="50%" x2="50%" y1="10%" y2="90%"/>
+				<line x1="10%" x2="90%" y1="50%" y2="50%"/>-->
+				<path id="half-circle" d="M210 110 A 100 100, 0, 0, 1, 210 310 L 210 210 Z"/>
+			</svg>
+			<svg id="guage" width="100%" height="100%">
+				<line id="tick-line" x1="21%" x2="21%" y1="40%" y2="60%"/>
+				<line id="ticks" x1="21%" x2="21%" y1="40%" y2="60%"/>
+				<circle id="indicator" r="3" cx="18%" cy="52%"/>
+			</svg>
 		</div>
 		<div class="magnifying-glass-icon">
 			<svg width="100%" height="100%">

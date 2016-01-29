@@ -232,7 +232,7 @@ body {
 	width: 15px;
 	display: inline-block;
 	vertical-align: middle;
-	border: 2px solid rgba(255,255,255,.75);
+	border: 2px solid rgba(255,255,255,.85);
 	border-radius: 100%;
 	padding: 7px;
 	background: black;
@@ -240,12 +240,12 @@ body {
 	svg {
 		circle {
 			fill: none;
-			stroke: rgba(255,255,255,.75);
-			stroke-width: 2;
+			stroke: rgba(255,255,255,.95);
+			stroke-width: 1.5;
 		}
 		line {
-			stroke: rgba(255,255,255,.75);
-			stroke-width: 2;
+			stroke: rgba(255,255,255,.95);
+			stroke-width: 1.5;
 		}
 	}
 }
@@ -255,6 +255,8 @@ body {
 	opacity: 0;
 	pointer-events: none;
 	position: fixed;
+	top: 0;
+	left: 0;
 	white-space: nowrap;
 	transition: visibility .25s, opacity .25s;
 
@@ -289,7 +291,7 @@ body {
 	}
 }
 
-.magnifying-glass {
+/*.magnifying-glass {
 	position: fixed;
 	z-index: 99;
 	width: 200px;
@@ -346,6 +348,98 @@ body {
 		position: absolute;
 		top: 48%;
 		right: -15px;
+	}
+}*/
+
+.magnifying-glass {
+	width: 420px;
+	height: 420px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	pointer-events: none;
+	opacity: 0;
+	visibility: visible;
+	transition: opacity .15s, visibility .15s;
+
+	.magnifying-glass-reticle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		.magnifying-glass-border {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255,255,255,.75);
+			clip-path: url(#outer-clip);
+		}
+
+		.magnifying-glass-image-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			clip-path: url(#inner-clip);
+			overflow: hidden;
+
+			.magnifying-glass-image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: black;
+				background-repeat: no-repeat;
+			}
+		}
+
+		svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			#outer-scope {
+				fill: rgba(0,0,0,.35);
+				stroke: rgba(255,255,255,.85);
+				stroke-width: 1;
+			}
+
+			line, circle {
+				fill: none;
+				stroke: rgba(255,255,255,.85);
+				stroke-width: 1;
+			}
+
+			&#sights {
+				#half-circle {
+					fill: rgba(255,255,255,.22);
+				}
+			}
+
+			&#guage {
+				#ticks {
+					stroke-width: 4;
+					stroke-dasharray: 1 1%;
+				}
+			}
+		}
+	}
+
+	.magnifying-glass-icon {
+		z-index: 99;
+		position: absolute;
+		top: 46%;
+		left: 71.35%;
+	}
+
+	&.magnifying-glass-reveal {
+		opacity: 1;
+		visibility: visible;
 	}
 }
 

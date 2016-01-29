@@ -945,26 +945,27 @@ var tooltips = {
 	title: '',
 
 	init: function() {
+		var tooltipDiv = $('.tooltip');
 		$('.js-tooltip').on({
 			mouseenter: function(event){
 				tooltips.current = $(this);
 				tooltips.title = tooltips.current.data('title');
 				$('.tooltip-text').html(tooltips.title);
-				$('.tooltip').addClass('tooltip-reveal');
+				tooltipDiv.addClass('tooltip-reveal');
 			},
 			mousemove: function(event){
 				var pageX = event.pageX,
 					pageY = event.pageY;
-				$('.tooltip').css({'left': pageX - 15, 'top': pageY - 20});
+				TweenMax.set(tooltipDiv, {x: pageX - 15, y: pageY - 20, force3D: true});
 			},
 			mouseleave: function(event){
-				$('.tooltip').removeClass('tooltip-reveal');
+				tooltipDiv.removeClass('tooltip-reveal');
 			}
 		});
 	}
 };
 
-var magnifyingGlass = {
+/*var magnifyingGlass = {
 
 	glassSize: 200,
 
@@ -1025,16 +1026,6 @@ var magnifyingGlass = {
 
 					magnifyingGlass.glassSize = newGlassSize;
 					centerToMouse();
-
-					/*var maxBlur = Math.min(Math.max(wheelDeltaModifier, 0), 7);
-
-					magnifyingGlassDivInternal.css({
-						'filter': 'blur(' + maxBlur + 'px)',
-						'-moz-ilter': 'blur(' + maxBlur + 'px)',
-						'-webkit-filter': 'blur(' + maxBlur + 'px)',
-						'-o-filter': 'blur(' + maxBlur + 'px)',
-						'-ms-filter': 'blur(' + maxBlur + 'px)',
-					});*/
 				
 				});
 
@@ -1073,6 +1064,174 @@ var magnifyingGlass = {
 			mouseleave: function(event){
 				$(window).off('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel');
 				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
+			}
+		});
+	}
+};*/
+
+var magnifyingGlass = {
+
+	defaultGlassSize: 200,
+
+	maxGlassSize: 400,
+
+	minGlassSize: 150,
+
+	currentGlassSize: 200,
+
+	currentSpecimen: {
+		image: '',
+		offset: '',
+		width: '',
+		height: ''
+	},
+
+	enlargedSpecimen: {
+		image: '',
+		width: '',
+		height:''
+	},
+
+	isVisible: false,
+
+	init: function() {
+
+		var magnifyingGlassDiv = $('.magnifying-glass'),
+			magnifyingGlassImageDiv = magnifyingGlassDiv.find('.magnifying-glass-image'),
+			magnifyingGlassBorderDiv = magnifyingGlassDiv.find('.magnifying-glass-border'),
+			magnifyingGlassIcon = magnifyingGlassDiv.find('.magnifying-glass-icon'),
+			innerClip = magnifyingGlassDiv.find('#inner-clip').find('circle'),
+			outerClip = magnifyingGlassDiv.find('#outer-clip').find('circle'),
+			outerScope = magnifyingGlassDiv.find('#outer-scope'),
+			sights = magnifyingGlassDiv.find('#sights'),
+			halfCircle = magnifyingGlassDiv.find('#half-circle'),
+			guage = magnifyingGlassDiv.find('#guage'),
+			ticks = magnifyingGlassDiv.find('#ticks'),
+			tickLine = magnifyingGlassDiv.find('#tick-line'),
+			indicator = magnifyingGlassDiv.find('#indicator');
+
+		TweenMax.set(magnifyingGlassDiv, {scaleX: 0, scaleY: 0, scaleZ: 0, force3D: true});
+
+		function centerToMouse(pageX, pageY){
+			var offset = magnifyingGlass.currentSpecimen.image.offset(),
+				proportionX = (pageX - offset.left) * (magnifyingGlass.enlargedSpecimen.width / magnifyingGlass.currentSpecimen.width * -1) + (magnifyingGlass.maxGlassSize / 2),
+				proportionY = (pageY - offset.top) * (magnifyingGlass.enlargedSpecimen.height / magnifyingGlass.currentSpecimen.height * -1) + (magnifyingGlass.maxGlassSize / 2);
+
+			TweenMax.set(magnifyingGlassDiv, {x: pageX - (magnifyingGlass.maxGlassSize / 2), y: pageY - (magnifyingGlass.maxGlassSize / 2), force3D: true});
+			TweenMax.set(magnifyingGlassImageDiv, {backgroundPosition: proportionX + 'px ' + proportionY + 'px'});
+		}
+
+		function setSize(){
+
+			var halfCurrent = magnifyingGlass.currentGlassSize / 2,
+				currentMinusDefault = magnifyingGlass.currentGlassSize - magnifyingGlass.defaultGlassSize;
+
+			// Clipsåå
+			TweenMax.to(innerClip, 0.1, {attr: {r: halfCurrent}, overwrite: true});
+			TweenMax.to(outerClip, 0.1, {attr: {r: halfCurrent + 2}, overwrite: true});
+
+			// Sights
+			TweenMax.to(outerScope, 0.1, {attr: {r: halfCurrent + 8}, overwrite: true, delay: 0.01});
+			TweenMax.to(halfCircle, 0.1, {scale: (magnifyingGlass.currentGlassSize / magnifyingGlass.defaultGlassSize), force3D: true, overwrite: true, delay: 0.01, transformOrigin: 'left center'});
+			TweenMax.to(magnifyingGlassIcon, 0.1, {x: (currentMinusDefault / 2), force3D: true, overwrite: true});
+
+			// Guage
+
+			var guageLocation = '';
+
+			if (currentMinusDefault < 0) {
+				guageLocation = (currentMinusDefault / -2);
+			}
+
+			if (currentMinusDefault >= 0) {
+				guageLocation = 45;
+			}
+
+			/*else {
+				guageLocation = (currentMinusDefault * 40 / magnifyingGlass.maxGlassSize);
+			}*/
+
+			if (currentMinusDefault >= 100) {
+				guageLocation = 45 - (magnifyingGlass.maxGlassSize * 30 / magnifyingGlass.currentGlassSize);
+			}
+
+			TweenMax.to(guage, 0.1, {x: guageLocation, force3D: true, overwrite: true});
+			TweenMax.to([ticks, tickLine], 0.1, {attr: {y1: (-0.05 * currentMinusDefault) + 40 + '%', y2: 100 - ((-0.05 * currentMinusDefault) + 40) + '%'}, overwrite: true});
+			TweenMax.to(indicator, 0.1, {attr: {cy: (-0.11 * (magnifyingGlass.currentGlassSize - magnifyingGlass.minGlassSize)) + 57.5 + '%'}, overwrite: true});
+		}
+
+		$('.js-magnify').on({
+			mouseenter: function(){
+
+				$(window).on('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel', function(event){
+
+					$('#sights').addClass('rotated');
+
+					var delta = event.originalEvent.wheelDelta,
+						wheelDeltaModifier = delta / 8;
+
+					if (event.detail) {
+						delta = event.detail * -1;
+						wheelDeltaModifier = delta * 2;
+					}
+
+					var newGlassSize = Math.min(Math.max(magnifyingGlass.currentGlassSize += wheelDeltaModifier, 150), 400);
+
+					magnifyingGlass.currentGlassSize = newGlassSize;
+
+					setSize();
+
+					var blurAmount = Math.min(Math.max(Math.abs(wheelDeltaModifier / 1.5), 0), 7),
+						contrastAmount = 100 + Math.min(Math.max(Math.abs(wheelDeltaModifier * 4), 0), 200),
+						rotationAmount = 0;
+
+					if (magnifyingGlass.currentGlassSize - magnifyingGlass.defaultGlassSize >= 0) {
+						rotationAmount = (0.45 * magnifyingGlass.currentGlassSize) - 90;
+					}
+
+					TweenMax.to(magnifyingGlassImageDiv, 0.5, {'-webkit-filter': 'blur(' + blurAmount + 'px)' + 'contrast(' + contrastAmount + '%)', overwrite: 'concurrent', ease: Power1.easeOut});
+
+					TweenMax.set(sights, {rotation: rotationAmount, force3D: true});
+
+				});
+
+				TweenMax.to(magnifyingGlassDiv, 0.25, {scaleX: 1, scaleY: 1, scaleZ: 1, force3D: true, ease: Back.easeOut});
+
+				magnifyingGlass.currentSpecimen.image = $(this);
+				magnifyingGlass.currentSpecimen.offset = magnifyingGlass.currentSpecimen.image.offset();
+				magnifyingGlass.currentSpecimen.width = magnifyingGlass.currentSpecimen.image.width();
+				magnifyingGlass.currentSpecimen.height = magnifyingGlass.currentSpecimen.image.height();				
+				magnifyingGlass.enlargedSpecimen.image = new Image();
+
+				var src = magnifyingGlass.currentSpecimen.image[0].src;
+
+				magnifyingGlass.enlargedSpecimen.image.src = src;
+				magnifyingGlass.enlargedSpecimen.width = magnifyingGlass.enlargedSpecimen.image.width;
+				magnifyingGlass.enlargedSpecimen.height = magnifyingGlass.enlargedSpecimen.image.height;
+
+				magnifyingGlassImageDiv.css({
+					width: magnifyingGlass.enlargedSpecimen.width + 'px',
+					height: magnifyingGlass.enlargedSpecimen.height + 'px',
+					backgroundImage: 'url(' + src + ')',
+				});
+
+				magnifyingGlassDiv.addClass('magnifying-glass-reveal');
+			},
+			mousemove: function(event){
+
+				if (!magnifyingGlass.isVisible){
+					magnifyingGlassDiv.addClass('magnifying-glass-reveal');
+					magnifyingGlass.isVisible = true;
+				}
+
+				centerToMouse(event.pageX, event.pageY);				
+			},
+			mouseleave: function(event){
+				$(window).off('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel');
+				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
+				TweenMax.to(magnifyingGlassDiv, 0.25, {scaleX: 0, scaleY: 0, scaleZ: 0, force3D: true, ease: Back.easeIn});
+				magnifyingGlass.currentGlassSize = magnifyingGlass.defaultGlassSize;
+				setSize();
 			}
 		});
 	}
