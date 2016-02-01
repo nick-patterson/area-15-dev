@@ -404,27 +404,38 @@ body {
 			left: 0;
 
 			#outer-scope {
-				fill: rgba(0,0,0,.35);
-				stroke: rgba(255,255,255,.85);
-				stroke-width: 1;
+				fill: rgba(0,0,0,.375);
+				stroke: rgba(255,255,255,.55);
+				stroke-width: 1.5;
 			}
 
 			line, circle {
 				fill: none;
-				stroke: rgba(255,255,255,.85);
+				stroke: rgba(255,255,255,.8);
 				stroke-width: 1;
+
 			}
 
 			&#sights {
+
 				#half-circle {
-					fill: rgba(255,255,255,.22);
+					fill: rgba(255,255,255,.25);
+				}
+
+				#inner-scope {
+					stroke: rgba(255,255,255, .6);
+					stroke-width: 4;
+					stroke-dasharray: 1 .75%;
+					transform-origin: center;
+					animation: rotate-inner-scope 25s infinite alternate ease-out;
 				}
 			}
 
 			&#guage {
+
 				#ticks {
 					stroke-width: 4;
-					stroke-dasharray: 1 1%;
+					stroke-dasharray: 1 .75%;
 				}
 			}
 		}
@@ -440,6 +451,16 @@ body {
 	&.magnifying-glass-reveal {
 		opacity: 1;
 		visibility: visible;
+	}
+}
+
+@keyframes rotate-inner-scope {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }
 
@@ -491,7 +512,6 @@ body {
 	.main-player-bg {
 		position: absolute;
 		height: 100px;
-		//min-height: 100px;
 		min-width: 100%;
 		left: 50%;
 		top: 14px;
@@ -516,7 +536,6 @@ body {
 	.brace {
 		position: absolute;
 		top: 56%;
-		//transform: translateY(-50%);
 		max-height: 70%;
 
 		&.brace-left {
@@ -1417,7 +1436,7 @@ body {
 	animation: loading 3s infinite;
 }
 
-// ANIMATIONS
+// UTILITY ANIMATIONS
 
 @keyframes loading {
 	0% {opacity: 1;}

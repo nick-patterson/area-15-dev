@@ -1079,6 +1079,11 @@ var magnifyingGlass = {
 
 	currentGlassSize: 200,
 
+	effects: {
+		blur: 0,
+		contrast: 100,
+	},
+
 	currentSpecimen: {
 		image: '',
 		offset: '',
@@ -1108,10 +1113,13 @@ var magnifyingGlass = {
 			guage = magnifyingGlassDiv.find('#guage'),
 			ticks = magnifyingGlassDiv.find('#ticks'),
 			tickLine = magnifyingGlassDiv.find('#tick-line'),
-			indicator = magnifyingGlassDiv.find('#indicator');
+			indicator = magnifyingGlassDiv.find('#indicator'),
+			innerScope = magnifyingGlassDiv.find('#inner-scope');
 
+		// Set scale of magnifying glass to 0,0
 		TweenMax.set(magnifyingGlassDiv, {scaleX: 0, scaleY: 0, scaleZ: 0, force3D: true});
 
+		// Center magnifying glass to mouse cursor
 		function centerToMouse(pageX, pageY){
 			var offset = magnifyingGlass.currentSpecimen.image.offset(),
 				proportionX = (pageX - offset.left) * (magnifyingGlass.enlargedSpecimen.width / magnifyingGlass.currentSpecimen.width * -1) + (magnifyingGlass.maxGlassSize / 2),
@@ -1121,43 +1129,84 @@ var magnifyingGlass = {
 			TweenMax.set(magnifyingGlassImageDiv, {backgroundPosition: proportionX + 'px ' + proportionY + 'px'});
 		}
 
+		// Handle sizing / layout of magnifying glass UI
 		function setSize(){
 
 			var halfCurrent = magnifyingGlass.currentGlassSize / 2,
-				currentMinusDefault = magnifyingGlass.currentGlassSize - magnifyingGlass.defaultGlassSize;
+				currentMinusDefault = magnifyingGlass.currentGlassSize - magnifyingGlass.defaultGlassSize,
+				sightRotation = 0;
 
-			// Clipsåå
+			if (currentMinusDefault >= 0) {
+				sightRotation = (0.45 * magnifyingGlass.currentGlassSize) - 90;
+			}
+
+			// Clips
 			TweenMax.to(innerClip, 0.1, {attr: {r: halfCurrent}, overwrite: true});
 			TweenMax.to(outerClip, 0.1, {attr: {r: halfCurrent + 2}, overwrite: true});
+
+			// Icon
+			TweenMax.to(magnifyingGlassIcon, 0.1, {x: (currentMinusDefault / 2), force3D: true, overwrite: true});
 
 			// Sights
 			TweenMax.to(outerScope, 0.1, {attr: {r: halfCurrent + 8}, overwrite: true, delay: 0.01});
 			TweenMax.to(halfCircle, 0.1, {scale: (magnifyingGlass.currentGlassSize / magnifyingGlass.defaultGlassSize), force3D: true, overwrite: true, delay: 0.01, transformOrigin: 'left center'});
-			TweenMax.to(magnifyingGlassIcon, 0.1, {x: (currentMinusDefault / 2), force3D: true, overwrite: true});
+			TweenMax.to(innerScope, 0.1, {attr: {r: halfCurrent - 8, delay: 0.01}, overwrite: 'concurrent'});
+			TweenMax.set(sights, {rotation: sightRotation, force3D: true});
 
 			// Guage
+			function setGuage() {
 
-			var guageLocation = '';
+				var guageLocation = 0,
+					topCoordsInPercentage = -0.05 * currentMinusDefault + 40 + '%',
+					bottomCoordsInPercentage = 100 - (-0.05 * currentMinusDefault + 40) + '%',
+					centerCoordsInPercentage = (-0.11 * (magnifyingGlass.currentGlassSize - magnifyingGlass.minGlassSize)) + 57.5 + '%';
 
-			if (currentMinusDefault < 0) {
-				guageLocation = (currentMinusDefault / -2);
+				if (currentMinusDefault < 0) {
+					guageLocation = (currentMinusDefault / -2);
+				}
+
+				else if (currentMinusDefault > 0) {
+
+					if (currentMinusDefault >= 125) {
+						guageLocation = 50 - (magnifyingGlass.maxGlassSize * 30 / magnifyingGlass.currentGlassSize);
+					}
+
+					else {
+						guageLocation = 50;
+					}
+				}
+
+				TweenMax.to(guage, 0.25, {x: guageLocation, force3D: true, overwrite: true});
+				TweenMax.to([ticks, tickLine], 0.1, {attr: {y1: topCoordsInPercentage, y2: bottomCoordsInPercentage}, overwrite: true});
+				TweenMax.to(indicator, 0.1, {attr: {cy: centerCoordsInPercentage}, overwrite: true});
+
 			}
 
-			if (currentMinusDefault >= 0) {
-				guageLocation = 45;
+			setGuage();
+		}
+
+		// Handle visual effects of magnifying glass image
+		function setEffects(delta){
+
+			var newEffects = {
+				blur: Math.min(Math.max(Math.abs(delta / 1.5), 0), 7),
+				contrast: 100 + Math.min(Math.max(Math.abs(delta * 8), 0), 200),
+			};
+
+			if (Math.abs(delta) < 4) {
+				newEffects.blur = 0;
+				newEffects.contrast = 100;
 			}
 
-			/*else {
-				guageLocation = (currentMinusDefault * 40 / magnifyingGlass.maxGlassSize);
-			}*/
-
-			if (currentMinusDefault >= 100) {
-				guageLocation = 45 - (magnifyingGlass.maxGlassSize * 30 / magnifyingGlass.currentGlassSize);
+			function updateHandler() {
+				TweenMax.set(magnifyingGlassImageDiv, {'-webkit-filter': 'blur(' + magnifyingGlass.effects.blur + 'px)' + 'contrast(' + magnifyingGlass.effects.contrast + '%)'});
 			}
 
-			TweenMax.to(guage, 0.1, {x: guageLocation, force3D: true, overwrite: true});
-			TweenMax.to([ticks, tickLine], 0.1, {attr: {y1: (-0.05 * currentMinusDefault) + 40 + '%', y2: 100 - ((-0.05 * currentMinusDefault) + 40) + '%'}, overwrite: true});
-			TweenMax.to(indicator, 0.1, {attr: {cy: (-0.11 * (magnifyingGlass.currentGlassSize - magnifyingGlass.minGlassSize)) + 57.5 + '%'}, overwrite: true});
+			function resetEffects() {
+				TweenMax.to(magnifyingGlass.effects, 0.225, {blur: 0, contrast: 100, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler});
+			}
+
+			TweenMax.to(magnifyingGlass.effects, 0.075, {blur: newEffects.blur, contrast: newEffects.contrast, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler});
 		}
 
 		$('.js-magnify').on({
@@ -1181,21 +1230,13 @@ var magnifyingGlass = {
 
 					setSize();
 
-					var blurAmount = Math.min(Math.max(Math.abs(wheelDeltaModifier / 1.5), 0), 7),
-						contrastAmount = 100 + Math.min(Math.max(Math.abs(wheelDeltaModifier * 4), 0), 200),
-						rotationAmount = 0;
-
-					if (magnifyingGlass.currentGlassSize - magnifyingGlass.defaultGlassSize >= 0) {
-						rotationAmount = (0.45 * magnifyingGlass.currentGlassSize) - 90;
-					}
-
-					TweenMax.to(magnifyingGlassImageDiv, 0.5, {'-webkit-filter': 'blur(' + blurAmount + 'px)' + 'contrast(' + contrastAmount + '%)', overwrite: 'concurrent', ease: Power1.easeOut});
-
-					TweenMax.set(sights, {rotation: rotationAmount, force3D: true});
+					setEffects(wheelDeltaModifier);					
 
 				});
 
 				TweenMax.to(magnifyingGlassDiv, 0.25, {scaleX: 1, scaleY: 1, scaleZ: 1, force3D: true, ease: Back.easeOut});
+
+				//initScopeTween();
 
 				magnifyingGlass.currentSpecimen.image = $(this);
 				magnifyingGlass.currentSpecimen.offset = magnifyingGlass.currentSpecimen.image.offset();
@@ -1227,6 +1268,7 @@ var magnifyingGlass = {
 				centerToMouse(event.pageX, event.pageY);				
 			},
 			mouseleave: function(event){
+				//scopeTween.kill();
 				$(window).off('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel');
 				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
 				TweenMax.to(magnifyingGlassDiv, 0.25, {scaleX: 0, scaleY: 0, scaleZ: 0, force3D: true, ease: Back.easeIn});

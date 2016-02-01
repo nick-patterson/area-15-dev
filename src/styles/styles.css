@@ -598,21 +598,35 @@ body {
   left: 0;
 }
 .magnifying-glass .magnifying-glass-reticle svg #outer-scope {
-  fill: rgba(0, 0, 0, 0.35);
-  stroke: rgba(255, 255, 255, 0.85);
-  stroke-width: 1;
+  fill: rgba(0, 0, 0, 0.375);
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.5;
 }
 .magnifying-glass .magnifying-glass-reticle svg line, .magnifying-glass .magnifying-glass-reticle svg circle {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.85);
+  stroke: rgba(255, 255, 255, 0.8);
   stroke-width: 1;
 }
 .magnifying-glass .magnifying-glass-reticle svg#sights #half-circle {
-  fill: rgba(255, 255, 255, 0.22);
+  fill: rgba(255, 255, 255, 0.25);
+}
+.magnifying-glass .magnifying-glass-reticle svg#sights #inner-scope {
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 4;
+  stroke-dasharray: 1 .75%;
+  -webkit-transform-origin: center;
+     -moz-transform-origin: center;
+      -ms-transform-origin: center;
+       -o-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: rotate-inner-scope 25s infinite alternate ease-out;
+     -moz-animation: rotate-inner-scope 25s infinite alternate ease-out;
+       -o-animation: rotate-inner-scope 25s infinite alternate ease-out;
+          animation: rotate-inner-scope 25s infinite alternate ease-out;
 }
 .magnifying-glass .magnifying-glass-reticle svg#guage #ticks {
   stroke-width: 4;
-  stroke-dasharray: 1 1%;
+  stroke-dasharray: 1 .75%;
 }
 .magnifying-glass .magnifying-glass-icon {
   z-index: 99;
@@ -625,6 +639,53 @@ body {
   visibility: visible;
 }
 
+@-webkit-keyframes rotate-inner-scope {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotate-inner-scope {
+  0% {
+    -moz-transform: rotate(0deg);
+         transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+         transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes rotate-inner-scope {
+  0% {
+    -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+       transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-inner-scope {
+  0% {
+    -webkit-transform: rotate(0deg);
+       -moz-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+       -moz-transform: rotate(360deg);
+         -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
 .text-bold {
   font-weight: 600;
 }
