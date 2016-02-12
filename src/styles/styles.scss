@@ -14,6 +14,44 @@ body {
 	background-color: black;
 }
 
+#everything-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+// ====================================================//
+// ==========   VAULT   ===============================//
+// ====================================================//
+
+#main-vault-video-container {
+	height: 100%;
+	width: 177.77777777%;
+	position: relative;
+	left: -38.88888888%;
+	//background: red;
+	overflow: hidden;
+
+	.main-vault-video {
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translate(-50%,0);
+		visibility: hidden;
+		opacity: 0;
+
+		&.main-vault-video-active {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+// ====================================================//
+// ==========   INTERNAL ROOMS   ======================//
+// ====================================================//
+
 // SLIDER
 
 .slider-container {
@@ -1348,6 +1386,7 @@ body {
 	height: 100%;
 
 	&.loading-screen {
+		display: none;
 		background: black url('../steampunk-room-ui/objects.jpg') center no-repeat;
 		background-size: contain;
 	}

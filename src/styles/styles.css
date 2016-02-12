@@ -232,6 +232,37 @@ body {
   background-color: black;
 }
 
+#everything-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#main-vault-video-container {
+  height: 100%;
+  width: 177.77777777%;
+  position: relative;
+  left: -38.88888888%;
+  overflow: hidden;
+}
+#main-vault-video-container .main-vault-video {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+     -moz-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+       -o-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  visibility: hidden;
+  opacity: 0;
+}
+#main-vault-video-container .main-vault-video.main-vault-video-active {
+  visibility: visible;
+  opacity: 1;
+}
+
 .slider-container {
   background: black;
   overflow: hidden;
@@ -1595,6 +1626,7 @@ body {
   height: 100%;
 }
 .modal.utility-modal.loading-screen {
+  display: none;
   background: black url("../steampunk-room-ui/objects.jpg") center no-repeat;
   background-size: contain;
 }

@@ -592,6 +592,73 @@ function FifteenFourVideoPlayer(userConfig) {
 // ==========   MAIN OBJECTS   ========================//
 // ====================================================//
 
+var vaultVideoController = {
+
+	viewIndex: 1,
+
+	currentVideo: $('.main-vault-video'),
+
+	init: function() {
+
+		console.log('boom');
+
+		function checkViewIndex(direction) {
+			if(direction === 'previous') {
+				if(vaultVideoController.viewIndex === 0){
+					return 2;
+				}
+				else {
+					return vaultVideoController.viewIndex - 1;
+				}
+			}
+			else {
+				if(vaultVideoController.viewIndex === 2){
+					return 0;
+				}
+				else {
+					return vaultVideoController.viewIndex + 1;
+				}
+			}
+		}
+
+		$('.vault-nav-control').on('click', function(event) {
+
+			if ($(this).hasClass('nav-previous')) {
+				vaultVideoController.changeView(checkViewIndex('previous'));
+			}
+
+			else {
+				vaultVideoController.changeView(checkViewIndex('next'));
+			}
+		});
+
+		$(window).on('dblclick',function(event){
+			console.log('dblclick');
+			vaultVideoController.changeView(checkViewIndex('next'));
+		});
+	},
+
+	changeView: function(end) {
+
+		//console.log(end);
+
+		var videoContainer = $('#main-vault-video-container'),
+			currentOriginalVideo = vaultVideoController.currentVideo[0];
+
+		vaultVideoController.currentVideo.removeClass('main-vault-video-active');
+		currentOriginalVideo.currentTime = 0;
+
+		vaultVideoController.currentVideo = videoContainer.find('.main-vault-video[data-start=' + vaultVideoController.viewIndex + '][data-end=' + end + ']');
+		currentOriginalVideo = vaultVideoController.currentVideo[0];
+
+		//console.log(vaultVideoController.currentVideo);
+
+		vaultVideoController.currentVideo.addClass('main-vault-video-active');
+		currentOriginalVideo.play();
+	}
+
+};
+
 var slider = new Area15Slider({name: 'Main Slider', hasProgress: true});
 
 var modal = {
@@ -1336,6 +1403,8 @@ $(window).load(function(event){
 	uiActiveStates.init();
 	tooltips.init();
 	magnifyingGlass.init();
+
+	vaultVideoController.init();
 
 });
 
