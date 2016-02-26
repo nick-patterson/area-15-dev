@@ -594,13 +594,16 @@ function FifteenFourVideoPlayer(userConfig) {
 
 var vaultVideoController = {
 
-	viewIndex: 1,
+	viewIndex: 0,
 
-	currentVideo: $('.main-vault-video'),
+	currentVideo: '',
+	isMoving: false,
+
+	setBeginningVideo: function(video) {
+		vaultVideoController.currentVideo = video;
+	},
 
 	init: function() {
-
-		console.log('boom');
 
 		function checkViewIndex(direction) {
 			if(direction === 'previous') {
@@ -621,7 +624,13 @@ var vaultVideoController = {
 			}
 		}
 
+		vaultVideoController.setBeginningVideo($('.main-vault-video-active'));
+
 		$('.vault-nav-control').on('click', function(event) {
+
+			if (vaultVideoController.isMoving) {
+				return false;
+			}
 
 			if ($(this).hasClass('nav-previous')) {
 				vaultVideoController.changeView(checkViewIndex('previous'));
@@ -632,29 +641,66 @@ var vaultVideoController = {
 			}
 		});
 
-		$(window).on('dblclick',function(event){
-			console.log('dblclick');
-			vaultVideoController.changeView(checkViewIndex('next'));
+		$('.vault-player-button').not('#mazmen-chamber-button').on('click', function(event) {
+
+			if (vaultVideoController.isMoving) {
+				return false;
+			}
+
+			var toView = $(this).data('to');
+			if (toView === vaultVideoController.viewIndex) {
+				var wiggle = new TimelineMax({onComplete: this.kill})
+					.to([this, '#vault-player-indicator'], 0.05, {x: 3})
+					.to([this, '#vault-player-indicator'], 1.5, {x: 0, ease: Elastic.easeOut.config(0.9,0.1)});
+				return false;
+			}
+
+			else {
+				vaultVideoController.changeView(toView);
+			}
 		});
+
 	},
 
 	changeView: function(end) {
 
-		//console.log(end);
-
 		var videoContainer = $('#main-vault-video-container'),
-			currentOriginalVideo = vaultVideoController.currentVideo[0];
+			oldVideoElement = vaultVideoController.currentVideo[0],
+			currentVideoElement = '',
+			restoreUI = function(){
+				console.log('restoreUI');
+				vaultVideoController.isMoving = false;
+				$('#vault-player-button-container').removeClass('disabled');
+				$(oldVideoElement).removeClass('main-vault-video-staged');
+				currentVideoElement.removeEventListener('ended', restoreUI);
+			};
 
+		// Disable UI
+		vaultVideoController.isMoving = true;
+		$('#vault-player-button-container').addClass('disabled');
+
+		// Transition UI to correct marker
+		$('.vault-player-button[data-to="' + vaultVideoController.viewIndex + '"]').removeClass('vault-player-button-active');
+		$('.vault-player-button[data-to="' + end + '"]').addClass('vault-player-button-active');
+		TweenMax.to('#vault-player-indicator', 0.65, {x: 100 * end + '%', force3D: true, ease: Power1.easeInOut});
+
+		// Reset Active Video
 		vaultVideoController.currentVideo.removeClass('main-vault-video-active');
-		currentOriginalVideo.currentTime = 0;
+		oldVideoElement.currentTime = 0;
 
+		// Designate new active video
 		vaultVideoController.currentVideo = videoContainer.find('.main-vault-video[data-start=' + vaultVideoController.viewIndex + '][data-end=' + end + ']');
-		currentOriginalVideo = vaultVideoController.currentVideo[0];
+		vaultVideoController.currentVideo.addClass('main-vault-video-staged main-vault-video-active');
+		currentVideoElement = vaultVideoController.currentVideo[0];
 
-		//console.log(vaultVideoController.currentVideo);
+		// Play new active video
+		currentVideoElement.play();
 
-		vaultVideoController.currentVideo.addClass('main-vault-video-active');
-		currentOriginalVideo.play();
+		// Restore UI
+		currentVideoElement.addEventListener('ended', restoreUI);
+
+		// Update viewIndex
+		vaultVideoController.viewIndex = end;
 	}
 
 };
@@ -1383,6 +1429,36 @@ var dynamicImageLoad = {
 	}
 };
 
+var vaultVideoSizing = {
+
+	container: '',
+	video: '',
+
+	correctAspectRatio: function() {
+
+		if (window.matchMedia('screen and (min-aspect-ratio:16/9)').matches) {
+			vaultVideoSizing.video.removeClass('by-height');
+			vaultVideoSizing.video.addClass('by-width');
+		}
+
+		else {
+			vaultVideoSizing.video.removeClass('by-width');
+			vaultVideoSizing.video.addClass('by-height');
+		}
+	},
+
+	init: function() {
+		vaultVideoSizing.container = $('#main-vault-video-container');
+		vaultVideoSizing.video = vaultVideoSizing.container.find('video');
+
+		vaultVideoSizing.correctAspectRatio();
+
+		$(window).on('resize', function(event) {
+			vaultVideoSizing.correctAspectRatio();
+		});
+	}
+};
+
 
 // ON READY
 
@@ -1404,6 +1480,7 @@ $(window).load(function(event){
 	tooltips.init();
 	magnifyingGlass.init();
 
+	vaultVideoSizing.init();
 	vaultVideoController.init();
 
 });

@@ -1,0 +1,287 @@
+// ====================================================//
+// ==========   UNIVERSAL UI   ========================//
+// ====================================================//
+
+.js-ui-interactive {
+	&:hover {
+		cursor: pointer;
+	}
+
+	.js-ui-active {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.js-ui-rotate-right {
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+	}
+}
+
+.ui-border {
+	border: 1px solid rgba(255,255,255,.75);
+}
+
+.js-ui-flicker {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.js-tooltip, .js-magnify {
+
+	&:hover {
+		cursor: none;
+	}
+
+	*:hover {
+		cursor: none;
+	}
+}
+
+.magnifying-glass-icon {
+	position: relative;
+	width: auto;
+	height: 15px;
+	width: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	border: 2px solid rgba(255,255,255,.85);
+	border-radius: 100%;
+	padding: 7px;
+	background: black;
+
+	svg {
+		circle {
+			fill: none;
+			stroke: rgba(255,255,255,.95);
+			stroke-width: 1.5;
+		}
+		line {
+			stroke: rgba(255,255,255,.95);
+			stroke-width: 1.5;
+		}
+	}
+}
+
+.tooltip {
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
+	transition: visibility .25s, opacity .25s;
+
+	&.hover {
+		cursor: none;
+	}
+
+	.tooltip-text {
+		text-transform: uppercase;
+		font-size: .85em;
+		overflow: hidden;
+		line-height: 20px;
+		display: inline-block;
+		vertical-align: middle;
+		padding: .65em 2.5em;
+		margin-left: -20px;
+		white-space: nowrap;
+		max-width: 0px;
+		background: rgba(0,0,0,.65);
+		border: 1px solid rgba(255,255,255,.75);
+		color: white;
+		transition: max-width 1s ease-out;
+	}
+
+	&.tooltip-reveal {
+		visibility: visible;
+		opacity: 1;
+
+		.tooltip-text {
+			max-width: 220px;
+		}
+	}
+}
+
+/*.magnifying-glass {
+	position: fixed;
+	z-index: 99;
+	width: 200px;
+	height: 200px;
+	transform: scale(0,0);
+	border-radius: 100%;
+	border: 2px solid rgba(255,255,255,.75);
+	box-shadow: 2px 5px 15px rgba(0,0,0,.4);
+	background-color: rgba(0,0,0,.65);
+	background-repeat: no-repeat;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: visibility .15s, opacity .15s, transform .15s;
+
+	&:before {
+		z-index: 99;
+		content: '';
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		right: -2px;
+		bottom: -2px;
+		border: 2px solid white;
+		border-radius: 100%;
+	}
+
+	.magnifying-glass-internal-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		border-radius: 100%;
+		-webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+
+		.magnifying-glass-internal {
+			z-index: 98;
+			position: absolute;
+			background: url('../img/steampunk-room/bodie-flyer.png');
+			filter: blur(0px);
+		}
+	}
+
+	&.magnifying-glass-reveal {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1,1);
+	}
+
+	.magnifying-glass-icon {
+		z-index: 99;
+		position: absolute;
+		top: 48%;
+		right: -15px;
+	}
+}*/
+
+.magnifying-glass {
+	width: 420px;
+	height: 420px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	pointer-events: none;
+	opacity: 0;
+	visibility: visible;
+	transition: opacity .15s, visibility .15s;
+
+	.magnifying-glass-reticle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		.magnifying-glass-border {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255,255,255,.75);
+			clip-path: url(#outer-clip);
+		}
+
+		.magnifying-glass-image-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			clip-path: url(#inner-clip);
+			overflow: hidden;
+
+			.magnifying-glass-image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: black;
+				background-repeat: no-repeat;
+			}
+		}
+
+		svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			#outer-scope {
+				fill: rgba(0,0,0,.375);
+				stroke: rgba(255,255,255,.55);
+				stroke-width: 1.5;
+			}
+
+			line, circle {
+				fill: none;
+				stroke: rgba(255,255,255,.8);
+				stroke-width: 1;
+
+			}
+
+			&#sights {
+
+				#half-circle {
+					fill: rgba(255,255,255,.25);
+				}
+
+				#inner-scope {
+					stroke: rgba(255,255,255, .6);
+					stroke-width: 4;
+					stroke-dasharray: 1 .75%;
+					transform-origin: center;
+					animation: rotate-inner-scope 25s infinite alternate ease-out;
+				}
+			}
+
+			&#guage {
+
+				#ticks {
+					stroke-width: 4;
+					stroke-dasharray: 1 .75%;
+				}
+			}
+		}
+	}
+
+	.magnifying-glass-icon {
+		z-index: 99;
+		position: absolute;
+		top: 46%;
+		left: 71.35%;
+	}
+
+	&.magnifying-glass-reveal {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+@keyframes rotate-inner-scope {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.text-bold {
+	font-weight: 600;
+}
+
+.disabled {
+	opacity: .5;
+	pointer-events: none;
+}

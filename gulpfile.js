@@ -32,7 +32,7 @@ gulp.task('serve', ['sass'], function() {
         open: "external"
     });
 
-    gulp.watch(src.scss, ['sass']);
+    gulp.watch('./src/styles/*.scss', ['sass']);
     gulp.watch('./dist/*.html').on('change', reload);
     gulp.watch('./dist/scripts/*/*.js').on('change', reload);
 });

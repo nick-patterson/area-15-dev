@@ -15,10 +15,10 @@
 	<div id="everything-container">
 
 		<div id="main-vault-video-container">
-			<video class="main-vault-video main-vault-video-active" data-start="0" data-end="1" controls>
+			<video class="main-vault-video" data-start="0" data-end="1">
 				<source src="videos/vault/left-to-center.mp4" type="video/mp4">
 			</video>
-			<video class="main-vault-video" data-start="0" data-end="2">
+			<video class="main-vault-video main-vault-video-staged main-vault-video-active" data-start="0" data-end="2">
 				<source src="videos/vault/left-to-right.mp4" type="video/mp4">
 			</video>
 			<video class="main-vault-video" data-start="1" data-end="0">
@@ -33,6 +33,85 @@
 			<video class="main-vault-video" data-start="2" data-end="1">
 				<source src="videos/vault/right-to-center.mp4" type="video/mp4">
 			</video>
+		</div>
+
+		<div id="vault-player-bar">
+			<div id="vault-player-button-container">
+				<div id="vault-player-indicator">
+					<svg id="vault-player-indicator-marker" viewBox="-5 -5 250 423.75">
+							<path d="M360.61,201.52h-0.27a114.35,114.35,0,1,0-213.68,0h-0.27l1.06,2.54c0.54,1.36,1.08,2.71,1.66,4L253.5,459.58,357.88,208.1c0.59-1.33,1.13-2.68,1.68-4Z" transform="translate(-133.36 -41.62)"/>
+					</svg>
+					<div id="vault-player-indicator-line">
+					</div>
+				</div>
+				<div id="arctic-button" class="vault-player-button vault-player-button-active" data-to="0">
+					<svg viewBox="-5 -10 450 510">
+						<circle cx="217.44" cy="278.46" r="211.81"/>
+						<circle cx="217.44" cy="278.46" r="165.01"/>
+						<line x1="217.53" y1="133.19" x2="217.53" y2="145.92"/>
+						<line x1="217.53" y1="412.55" x2="217.53" y2="425.28"/>
+						<line x1="144.51" y1="152.76" x2="150.87" y2="163.78"/>
+						<line x1="284.19" y1="394.69" x2="290.55" y2="405.71"/>
+						<line x1="91.06" y1="206.21" x2="102.08" y2="212.58"/>
+						<line x1="332.99" y1="345.89" x2="344.01" y2="352.26"/>
+						<line x1="71.49" y1="279.23" x2="84.21" y2="279.23"/>
+						<line x1="350.85" y1="279.23" x2="363.57" y2="279.23"/>
+						<line x1="91.06" y1="352.26" x2="102.08" y2="345.89"/>
+						<line x1="332.99" y1="212.58" x2="344.01" y2="206.21"/>
+						<line x1="144.51" y1="405.71" x2="150.87" y2="394.69"/>
+						<line x1="284.19" y1="163.78" x2="290.55" y2="152.76"/>
+						<circle cx="217.44" cy="279.22" r="17.54"/>
+						<polyline points="237.97 66.65 237.97 37.25 195.12 37.25 195.12 66.65"/>
+						<rect x="171.66" y="5.63" width="89.76" height="31.62" rx="3.5" ry="3.5"/>
+						<line x1="132.41" y1="231.32" x2="188.5" y2="262.93"/>
+						<polyline points="132.1 247.86 128.8 229.38 146.06 222.01"/>
+						<line x1="291.37" y1="283.22" x2="250.1" y2="279.31"/>
+						<polyline points="285.15 268.26 295.45 283.59 282.49 296.75"/>
+						<path d="M218.9,363.76a87,87,0,0,0,68.37.29" transform="translate(-36 -5.49)"/>
+						<path d="M287.26,203.85a87,87,0,0,0-68.37.29" transform="translate(-36 -5.49)"/>
+					</svg>
+				</div>
+				<div id="steampunk-button" class="vault-player-button" data-to="1">
+					<svg viewBox="-5 -5 453 508">
+						<path d="M253.5,496.42c-72.82,0-128.94-24.73-166.81-73.49C4.46,317.06,40.06,131.55,59.18,56.7a61.3,61.3,0,0,1,59.45-46.13H160c21.23,0,30.33,12.42,31,37.4,0.66,25.63-7.54,39.8-29.19,39.8H131c-24,100.78-31.53,225.82,16.63,287.83,22.81,29.37,57.43,43.64,105.85,43.64s83-14.27,105.85-43.64c48.16-62,40.6-187,16.63-287.83H347c-21.23,0-30.33-12.42-31-37.4-0.66-25.63,7.54-39.8,29.19-39.8h43.14a61.3,61.3,0,0,1,59.46,46.14c19.12,74.84,54.72,260.35-27.51,366.22C382.44,471.7,326.32,496.42,253.5,496.42Z" transform="translate(-29.07 -4.78)"/>
+						<path d="M422,331.06S407.9,442.94,285.74,455.79" transform="translate(-29.07 -4.78)"/>
+						<path class="cls-2" d="M414,85.51S441.24,183,432.21,275" transform="translate(-29.07 -4.78)"/>
+						<path d="M85.47,331.06s14.14,111.87,136.3,124.73" transform="translate(-29.07 -4.78)"/>
+						<path class="cls-2" d="M93.49,85.51S66.27,183,75.31,275" transform="translate(-29.07 -4.78)"/>
+						<line x1="188.52" y1="260.5" x2="267.17" y2="339.16"/>
+						<line x1="267.17" y1="260.5" x2="188.52" y2="339.16"/>
+						<line x1="188.52" y1="136.16" x2="267.17" y2="214.82"/>
+						<line x1="267.17" y1="136.16" x2="188.52" y2="214.82"/>
+					</svg>
+				</div>
+				<div id="underwater-button" class="vault-player-button" data-to="2">
+					<svg viewBox="-5 -10 425 508">
+						<circle cx="208.46" cy="206.2" r="93"/>
+						<ellipse cx="208.47" cy="26.95" rx="68.37" ry="21.16"/>
+						<ellipse cx="388.48" cy="206.2" rx="21.16" ry="68.37"/>
+						<ellipse cx="26.95" cy="206.2" rx="21.16" ry="68.37"/>
+						<path d="M76.54,143.38A190.54,190.54,0,0,1,184.77,33.79" transform="translate(-45.78 -4.43)"/>
+						<path d="M161.23,376.29a190.61,190.61,0,0,1-84.7-98.42" transform="translate(-45.78 -4.43)"/>
+						<path d="M431.86,278.08a190.61,190.61,0,0,1-84.61,98.2" transform="translate(-45.78 -4.43)"/>
+						<path d="M322.61,33.36A190.51,190.51,0,0,1,433.16,146.7" transform="translate(-45.78 -4.43)"/>
+						<path d="M101.93,367.51a792.12,792.12,0,0,0,297.49,1.34c10.88-2,21.52-4.23,31.59-6.62a17.87,17.87,0,0,1,22,18.37c-2.91,51.69-28.5,116.17-198.86,116.17h0.06c-170.36,0-196-64.48-198.86-116.17a17.87,17.87,0,0,1,22-18.37C85.33,364.11,93.54,365.87,101.93,367.51Z" transform="translate(-45.78 -4.43)"/>
+						<path d="M161.24,408.61Q181,411,200.87,412.29" transform="translate(-45.78 -4.43)"/>
+						<path d="M347.24,408.61q-19.78,2.34-39.63,3.67" transform="translate(-45.78 -4.43)"/>
+						<line x1="166.35" y1="123.54" x2="166.35" y2="290.31"/>
+						<line x1="249.46" y1="123.54" x2="249.46" y2="290.31"/>
+						<line x1="291.29" y1="165.37" x2="124.52" y2="165.37"/>
+						<line x1="291.29" y1="248.47" x2="124.52" y2="248.47"/>
+						<line x1="208.47" y1="83.94" x2="208.47" y2="111.16"/>
+						<line x1="208.47" y1="301.84" x2="208.47" y2="334.67"/>
+						<path d="M181.05,491.82s17.49-30,73.2-30,73.17,27.7,73.17,27.7" transform="translate(-45.78 -4.43)"/>
+					</svg>
+				</div>
+				<div id="mazmen-chamber-button" class="vault-player-button">
+					<svg viewBox="-5 -10 433.59 455">
+						<path d="M111.24,36.74h69.35v201H111.24V158.68c-20.41,11.2-45.53,15.69-68.73,15.69v-70C80.49,104.41,111.24,75.28,111.24,36.74Zm324,308.41V269.48H366V345H330.15c-26.4,0-47.89-21.68-47.89-48.33h-0.15l0-27.19H212v31.89c0,60.79,48.84,110.07,109.09,110.07H365.9v58.82h69.31V410.72H464.5V345.15H435.22ZM324.05,196.54A42.1,42.1,0,0,1,366,237.76h69.26c0-66.15-45.31-107.22-110.51-107.22a116.65,116.65,0,0,0-43.25,8.27v-32h136V36.74H212v201h70.12A42.11,42.11,0,0,1,324.05,196.54Z" transform="translate(-36.7 -30.95)"/>
+					</svg>
+				</div>
+			</div>
 		</div>
 
 	</div>

@@ -1,0 +1,260 @@
+// ====================================================//
+// ==========   STEAMPUNK UI   ========================//
+// ====================================================//
+
+.steampunk-map-button-container {
+	position: fixed;
+	width: 115px;
+	height: 132px;
+	top: 0;
+	left: 65px;
+	z-index: 1;
+	transition: left .5s;
+
+	// RATIO OF 1.152
+
+	.map-button-passive, .map-button-active {
+		max-width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.map-button-knob-passive, .map-button-knob-active, .map-button-knob-flicker {
+		position: absolute;
+		left: 23.75%;
+		top: 11%;
+		width: 53.17%;
+	}
+}
+
+.steampunk-player-bar {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 105px;
+	background: black;
+
+	* {
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+	}
+
+	.main-player-bg {
+		position: absolute;
+		height: 100px;
+		min-width: 100%;
+		left: 50%;
+		top: 14px;
+		transform: translate(-50%,0);
+	}
+
+	.track {
+		position: absolute;
+		top: 57%;
+		transform: translate(0,-50%);
+		max-height: 20px;
+
+		&.track-left {
+			left: 0;
+		}
+
+		&.track-right {
+			right: 0;
+		}
+	}
+
+	.brace {
+		position: absolute;
+		top: 56%;
+		max-height: 70%;
+
+		&.brace-left {
+			left: 0;
+			transform: translate(-60%, -50%);
+		}
+
+		&.brace-right {
+			right: 0;
+			transform: translate(8%, -50%);
+		}
+	}
+
+	.decorative-knob, .decorative-knob-flicker {
+		position: absolute;
+		top: 57.5%;
+		left: 55px;
+		transform: translate(0,-50%);
+		max-height: 65%;
+	}
+
+	.eq {
+		position: absolute;
+		top: 57%;
+		left: 140px;
+		transform: translate(0,-50%);
+		max-height: 73%;
+	}
+
+	.nav-next-container {
+		z-index: 5;
+		position: absolute;
+		top: 57%;
+		right: 150px;
+		transform: translate(0,-50%);
+		height: 45px;
+		width: 45px;
+
+		img {
+			position: absolute;
+			height: 100%;
+			width: auto;
+		}
+	}
+
+	.nav-previous-container {
+		z-index: 5;
+		position: absolute;
+		top: 57%;
+		right: 205px;
+		transform: translate(0,-50%);
+		height: 45px;
+		width: 45px;
+
+		img {
+			position: absolute;
+			height: 100% !important;
+			width: auto;
+		}
+	}
+
+	.playbar-container {
+		position: absolute;
+		left: 230px;
+		right: 280px;
+		height: 72%;
+		top: 57%;
+		transition: left .5s, right .5s;
+		transform: translate(0,-50%);
+
+		.scroll-container {
+			position: absolute;
+			top: 50%;
+			left: 100px;
+			right: 100px;
+			height: 75%;
+			transform: translate(0,-50%);
+
+			.scroll-track {
+				position: absolute;
+				left: 25px;
+				right: 25px;
+				top: 50%;
+				transform: translate(0,-50%);
+				height: 80%;
+				background: rgba(0,0,0,.85);
+				border-radius: 10px;
+
+				.nav-progress-indicator-container {
+					position: absolute;
+					height: 100%;
+					left: 5px;
+					right: 10px;
+					background: url('../steampunk-room-ui/player/player-chain.png') center repeat-x;
+					background-size: 53px 10px;
+
+					.nav-progress-indicator {
+						position: absolute;
+						height: 70%;
+						top: 50%;
+						transform: translate(-50%,-50%);
+					}
+				}
+			}
+
+			.scroll-teeth {
+				position: absolute;
+				left: 30px;
+				right: 35px;
+				top: 50%;
+				transform: translate(0,-50%);
+				height: 83%;
+				background: url('../steampunk-room-ui/player/scroll-teeth.png') repeat-x;
+				background-size: auto 100%;
+			}
+
+			.scroll-cap {
+				position: absolute;
+				max-height: 100%;
+
+				&.scroll-cap-left {
+					left: 5px;
+				}
+
+				&.scroll-cap-right {
+					right: 0px;
+				}
+			}
+		}
+
+		.cog-window {
+			max-height: 100%;
+			position: absolute;
+			top: 50%;
+			transform: translate(0,-50%);
+
+			&.cog-window-left {
+				left: 0;
+			}
+
+			&.cog-window-right {
+				right: 0;
+			}
+		}
+	}
+
+	.gilding {
+		position: absolute;
+		top: 0;
+		right: 0;
+		min-width: 2100px;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 1279px) {
+	.steampunk-player-bar {
+		.eq, .decorative-knob, .decorative-knob-flicker {
+			display: none;
+		}
+
+		.playbar-container {
+			left: 100px;
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.steampunk-player-bar {
+		.brace-left, .brace-right {
+			display: none;
+		}
+
+		.nav-next-container {
+			right: 25px;
+		}
+
+		.nav-previous-container {
+			right: 80px;
+		}
+
+		.playbar-container {
+			left: 25px;
+			right: 135px;
+		}
+	}
+
+	.map-button-container {
+		left: 32px;
+	}
+}
