@@ -578,8 +578,8 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.75);
-  -webkit-clip-path: url(#outer-clip);
-          clip-path: url(#outer-clip);
+  -webkit-clip-path: url(../#outer-clip);
+          clip-path: url(../#outer-clip);
 }
 .magnifying-glass .magnifying-glass-reticle .magnifying-glass-image-container {
   position: absolute;
@@ -587,8 +587,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-clip-path: url(#inner-clip);
-          clip-path: url(#inner-clip);
+  -webkit-clip-path: url(../#inner-clip);
+          clip-path: url(../#inner-clip);
   overflow: hidden;
 }
 .magnifying-glass .magnifying-glass-reticle .magnifying-glass-image-container .magnifying-glass-image {

@@ -2,6 +2,10 @@
 // ==========   UNIVERSAL UI   ========================//
 // ====================================================//
 
+
+
+// ANIMATED UI ELEMENTS
+
 .js-ui-interactive {
 	&:hover {
 		cursor: pointer;
@@ -27,6 +31,10 @@
 	visibility: hidden;
 }
 
+
+
+// REMOVE CURSOR FOR CUSTOM TOOLTIPPED ELEMENTS
+
 .js-tooltip, .js-magnify {
 
 	&:hover {
@@ -37,6 +45,9 @@
 		cursor: none;
 	}
 }
+
+
+// EXAMINER TOOLTIP
 
 .magnifying-glass-icon {
 	position: relative;
@@ -104,6 +115,8 @@
 	}
 }
 
+// OLD MAGNIFYING GLASS
+
 /*.magnifying-glass {
 	position: fixed;
 	z-index: 99;
@@ -164,6 +177,10 @@
 	}
 }*/
 
+
+
+// NEW MAGNIFYING GLASS
+
 .magnifying-glass {
 	width: 420px;
 	height: 420px;
@@ -190,7 +207,7 @@
 			width: 100%;
 			height: 100%;
 			background: rgba(255,255,255,.75);
-			clip-path: url(#outer-clip);
+			clip-path: url(../#outer-clip);
 		}
 
 		.magnifying-glass-image-container {
@@ -199,7 +216,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			clip-path: url(#inner-clip);
+			clip-path: url(../#inner-clip);
 			overflow: hidden;
 
 			.magnifying-glass-image {

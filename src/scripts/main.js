@@ -1078,6 +1078,8 @@ var tooltips = {
 	}
 };
 
+// OLD MAGNIFYING GLASS
+
 /*var magnifyingGlass = {
 
 	glassSize: 200,
@@ -1181,6 +1183,9 @@ var tooltips = {
 		});
 	}
 };*/
+
+
+// NEW MAGNIFYING GLASS
 
 var magnifyingGlass = {
 
@@ -1306,36 +1311,33 @@ var magnifyingGlass = {
 				contrast: 100 + Math.min(Math.max(Math.abs(delta * 8), 0), 200),
 			};
 
-			if (Math.abs(delta) < 4) {
+			if (Math.abs(delta) < 5) {
 				newEffects.blur = 0;
 				newEffects.contrast = 100;
 			}
 
 			function updateHandler() {
-				TweenMax.set(magnifyingGlassImageDiv, {'-webkit-filter': 'blur(' + magnifyingGlass.effects.blur + 'px)' + 'contrast(' + magnifyingGlass.effects.contrast + '%)'});
+				TweenMax.set(magnifyingGlassImageDiv, {'-webkit-filter': 'blur(' + magnifyingGlass.effects.blur + 'px)' + ' contrast(' + magnifyingGlass.effects.contrast + '%)', 'filter': 'blur(' + magnifyingGlass.effects.blur + 'px)' + ' contrast(' + magnifyingGlass.effects.contrast + '%)'});
 			}
 
 			function resetEffects() {
-				TweenMax.to(magnifyingGlass.effects, 0.225, {blur: 0, contrast: 100, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler});
+				if (Math.abs(delta) >= 5) {
+					TweenMax.to(magnifyingGlass.effects, 0.225, {blur: 0, contrast: 100, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler});
+				}
 			}
 
-			TweenMax.to(magnifyingGlass.effects, 0.075, {blur: newEffects.blur, contrast: newEffects.contrast, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler});
+			TweenMax.to(magnifyingGlass.effects, 0.075, {blur: newEffects.blur, contrast: newEffects.contrast, overwrite: true, ease: Power1.easeInOut, onUpdate: updateHandler, onComplete: resetEffects});
 		}
 
 		$('.js-magnify').on({
 			mouseenter: function(){
 
-				$(window).on('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel', function(event){
+				$(window).on('wheel.magnifyingGlassWheel', function(event){
 
 					$('#sights').addClass('rotated');
 
-					var delta = event.originalEvent.wheelDelta,
+					var delta = event.originalEvent.deltaY,
 						wheelDeltaModifier = delta / 8;
-
-					if (event.detail) {
-						delta = event.detail * -1;
-						wheelDeltaModifier = delta * 2;
-					}
 
 					var newGlassSize = Math.min(Math.max(magnifyingGlass.currentGlassSize += wheelDeltaModifier, 150), 400);
 
@@ -1382,7 +1384,7 @@ var magnifyingGlass = {
 			},
 			mouseleave: function(event){
 				//scopeTween.kill();
-				$(window).off('mousewheel.magnifyingGlassWheel DOMMouseScroll.magnifyingGlassWheel');
+				$(window).off('wheel.magnifyingGlassWheel');
 				magnifyingGlassDiv.removeClass('magnifying-glass-reveal');
 				TweenMax.to(magnifyingGlassDiv, 0.25, {scaleX: 0, scaleY: 0, scaleZ: 0, force3D: true, ease: Back.easeIn});
 				magnifyingGlass.currentGlassSize = magnifyingGlass.defaultGlassSize;
