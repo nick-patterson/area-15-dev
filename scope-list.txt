@@ -1,0 +1,60 @@
+// ====================================================//
+// ==========   RUNNING LIST OF SCOPE   ===============//
+// ====================================================//
+
+/* CAPABILITIES
+	
+	- WEB
+
+		- UX Design
+		- Web Design
+		- Front-End Web Development
+		- Search Engine Optimization
+		- Quality Assurance Testing
+
+
+	- ANIMATION
+
+		- 3D Rendering
+		- Compositing
+
+
+	- DESIGN
+
+		- Graphic Design
+		- Art Direction
+
+
+	- STRATEGY
+		
+		- Content Strategy
+		- Copywriting
+		- Social Media Campaigning
+		- Analytics
+
+
+	- LIVE ACTION VIDEO
+
+		- Green Screen
+		
+
+	- AUDIO ENGINEERING
+
+		- Sound Design
+		- Score Writing
+
+*/
+
+
+/* WEB TECHNOLOGIES
+
+	- DOM Manipulation (Duh)
+	- CSS Animation
+	- Javascript Animation
+	- SVG
+	- 2D Canvas
+	- WebGL
+	- HTML5 Audio
+	- HTML5 Video
+
+*/
