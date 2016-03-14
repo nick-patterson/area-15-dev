@@ -47,9 +47,9 @@ var xrayScene = {
 		var zoomBlurEffect = new THREE.ShaderPass( THREE.ZoomBlurShader );
 		zoomBlurEffect.renderToScreen = true;
 
-		var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-		dotScreenEffect.uniforms.scale.value = 8;
-		dotScreenEffect.renderToScreen = true;
+		//var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
+		//dotScreenEffect.uniforms.scale.value = 8;
+		//dotScreenEffect.renderToScreen = true;
 
 		composer.addPass( renderPass );
 		composer.addPass( copyPass );

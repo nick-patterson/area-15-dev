@@ -12,24 +12,19 @@ THREE.ZoomBlurShader = {
 	uniforms: {
 
 		"tDiffuse": { type: "t", value: null },
-		"tSize":    { type: "v2", value: new THREE.Vector2( 600, 600 ) },
-		"tCoord":    { type: "v2", value: new THREE.Vector2( 0, 0 ) },
-		"center": { type: "v2", value: new THREE.Vector2( 0.5, 0.5 ) },
+		"center": { type: "v2", value: new THREE.Vector2( 0, -100 ) },
 		"strength": { type: "f", value: 0.3 },
+		"resolution": { type: "v2", value: new THREE.Vector2( 0.5, 0.5 ) },
 
 	},
 
 	vertexShader: [
+		"uniform vec2 center;",
+		"uniform float strength;",
+		"uniform vec2 resolution;",
 
-		'uniform sampler2D tDiffuse;',
-        'uniform vec2 center;',
-        'uniform float strength;',
-        'uniform vec2 tSize;',
-        'varying vec2 tCoord;',
-        'float random(vec3 scale, float seed) {',
-        	'return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);',
-    	'}',
 		"varying vec2 vUv;",
+		"uniform sampler2D tDiffuse;",
 
 		"void main() {",
 
@@ -37,7 +32,7 @@ THREE.ZoomBlurShader = {
 
 	].join( "\n" ),
 
-	/*fragmentShader: [
+	fragmentShader: [
 		"uniform vec2 center;",
 		"uniform float strength;",
 		"uniform vec2 resolution;",
@@ -69,40 +64,6 @@ THREE.ZoomBlurShader = {
 
 		"}"		
 
-	].join( "\n" )*/
-
-	fragmentShader: [
-		'uniform sampler2D tDiffuse;',
-        'uniform vec2 center;',
-        'uniform float strength;',
-        'uniform vec2 tSize;',
-        'varying vec2 tCoord;',
-        'float random(vec3 scale, float seed) {',
-        	'return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);',
-    	'}',
-
-        'void main() {',
-            'vec4 color = vec4(0.0);',
-            'float total = 0.0;',
-            'vec2 toCenter = center - tCoord * tSize;',
-
-            'float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);',
-
-            'for (float t = 0.0; t <= 40.0; t++) {',
-               ' float percent = (t + offset) / 40.0;',
-                'float weight = 4.0 * (percent - percent * percent);',
-                'vec4 sample = texture2D(tDiffuse, tCoord + toCenter * percent * strength / tSize);',
-
-                'sample.rgb *= sample.a;',
-
-                'color += sample * weight;',
-               'total += weight;',
-            '}',
-
-            'gl_FragColor = color / total;',
- 
-            'gl_FragColor.rgb /= gl_FragColor.a + 0.00001;',
-        '}'
 	].join( "\n" )
 
 };
