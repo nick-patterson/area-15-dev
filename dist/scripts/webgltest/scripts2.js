@@ -1,77 +1,154 @@
-var xrayScene = {
+function Area15XRayEffect(image, destination) {
 
-	init: function() {
+	// Extend scope
+	var self = this;
 
-		var canvas, scene, camera, surface, geom, loader, material, texture, composer, renderer;
+	// Define image to apply X-Ray effect to
+	this.image = {
+		imageObject: image,
+		width: image.width(),
+		height: image.outerHeight(),
+		aspectRatio: image.width() / image.height()
+	};
 
-		canvas = $('canvas');
+	// Define virtual drawing canvas to dynamically create texture off screen
+	this.virtualCanvas = document.createElement('canvas');
+	this.virtualCanvasContext = '';
 
+	// Define container to add new canvas
+	this.destination = {
+		destinationObject: destination,
+		width: destination.width(),
+		height: destination.height(),
+		offset: destination.offset(),
+		aspectRatio: destination.width() / destination.height()
+	};
+
+	// Initialize
+	this.init = function() {
+
+		// Set up virtual context
+		self.virtualCanvasContext = self.virtualCanvas.getContext('2d');
+
+		// Run functions
+		self.prepTexture();
+		self.setupWebGL();
+	};
+
+	// Prepare texture for webGL
+	this.prepTexture = function() {
+
+		// Update container vars
+		self.destination.width =  self.destination.destinationObject.width();
+		self.destination.height = self.destination.destinationObject.height();
+
+		self.virtualCanvas.width = self.destination.width;
+		self.virtualCanvas.height = self.destination.height;
+
+		// Calculate new image dimensions
+		var newImageHeight, newImageWidth;
+
+		if (self.image.aspectRatio > 1) {
+			newImageHeight = self.destination.width / self.image.aspectRatio;
+			newImageWidth = self.destination.width;
+		}
+
+		else {
+			newImageHeight = self.destination.height;
+			newImageWidth = self.destination.height * self.image.aspectRatio;
+		}
+
+		// Draw prepped image on virtual canvas
+		self.virtualCanvasContext.clearRect(0,0,self.destination.width,self.destination.height);
+		self.virtualCanvasContext.fillStyle = '#000';
+		self.virtualCanvasContext.fillRect(0,0,self.destination.width,self.destination.height);
+		self.virtualCanvasContext.drawImage(self.image.imageObject[0], (self.destination.width / 2) - (newImageWidth / 2), 0, newImageWidth, newImageHeight);
+
+	};
+
+	// Run the webGL
+	this.setupWebGL = function() {
+
+		var scene, camera, geometry, texture, material, xRayMaterial, surface, xRaySurface, renderer;
+
+		// Set up scene
 		scene = new THREE.Scene();
 
-		camera = new THREE.PerspectiveCamera(45, canvas.width() / canvas.height(), 0.1, 10000);
+		// Set up camera
+		camera = new THREE.PerspectiveCamera(45, self.destination.width / self.destination.height, 0.1, 10000);
+		camera.position.z = (self.destination.height / 2) / (Math.tan((Math.PI * 22.5) / 180));
 
-		camera.position.z = (canvas.height() / 2) / (Math.tan((Math.PI * 22.5) / 180));
+		// Create 2D drawing surface geometry
+		geometry = new THREE.BoxGeometry(self.destination.width,self.destination.height, 0);
 
-		geom = new THREE.BoxGeometry(canvas.width(),canvas.height(),0);
+		// Render prepped image as a texture
+		texture = new THREE.Texture(self.virtualCanvas);
+		texture.needsUpdate = true;
 
-		loader = new THREE.TextureLoader();
+		// Create material from texture alone
+		material = new THREE.MeshBasicMaterial({map: texture});
+		material.transparent = true;
+		material.opacity = 0.43;
 
-		loader.load('img/ted.png', function(texture) {
-			material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture});
-			texture.wrapS = THREE.RepeatWrapping;
-			texture.wrapT = THREE.RepeatWrapping;
-			texture.repeat.set( 1, 1 );
+		// Create X-Ray material from texture and zoom blur shader
+		xRayMaterial = new THREE.ShaderMaterial(THREE.ZoomBlurShader);
+		xRayMaterial.uniforms.tDiffuse.value = texture;
+		xRayMaterial.uniforms.strength.value = 0.05;
+		xRayMaterial.uniforms.resolution.value = new THREE.Vector2(self.destination.width, self.destination.height);
 
-			surface = new THREE.Mesh(geom, material);
+		// Create regular surface from geometry and material
+		surface = new THREE.Mesh(geometry, material);
+		surface.position.set(0, 0, 0.3);
 
-			scene.add(surface);
-		    render();
+		// Create X-Ray surface from geometry and material
+		xRaySurface = new THREE.Mesh(geometry, xRayMaterial);
 
-		    $(window).on('mousemove', function(event) {
-		    	zoomBlurEffect.uniforms.center.value = new THREE.Vector2(event.pageX,event.pageY);
-		    	render();
-		    });
-		},
-		function(xhr) {
-			console.log('progress');
-		},
-		function(xhr) {
-			console.log('load');
-		}
-		);
+		// Add surfaces to scene
+		scene.add(surface);
+		scene.add(xRaySurface);
 
-		renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas[0], antialias: true});
-		renderer.setSize(canvas.width(), canvas.height());
+		// Set up renderer
+		renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+		renderer.setSize(self.destination.width, self.destination.height);
 
-		composer = new THREE.EffectComposer( renderer );
+		// Aoppend renderer to destination DOM element
+		self.destination.destinationObject.append(renderer.domElement);
 
-		var renderPass = new THREE.RenderPass( scene, camera );
-
-		var copyPass = new THREE.ShaderPass( THREE.CopyShader );
-
-		var zoomBlurEffect = new THREE.ShaderPass( THREE.ZoomBlurShader );
-		zoomBlurEffect.uniforms.strength.value = 0.1125;
-		zoomBlurEffect.renderToScreen = true;
-
-		//var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-		//dotScreenEffect.uniforms.scale.value = 8;
-		//dotScreenEffect.renderToScreen = true;
-
-		composer.addPass( renderPass );
-		composer.addPass( copyPass );
-		composer.addPass( zoomBlurEffect );
-		//composer.addPass( dotScreenEffect );
-
+		// Render
 		function render() {
-			composer.render( scene, camera );
-			//composer.render();
-			//renderer.render();
+			renderer.render(scene, camera);
 		}
 
-	}
+		// Change shader vars on mouse move
+		function mouseDistort() {
+			self.destination.destinationObject.on('mousemove', function(event) {
+				xRayMaterial.uniforms.center.value = new THREE.Vector2(event.pageX - self.destination.offset.left, event.pageY - self.destination.offset.top);
+				render();
+			});
+		}
 
-};
+		// Resize everything appropriately
+		function resize() {
+			$(window).on('resize.xRayResize', function(event) {
+				self.prepTexture();
+				camera.aspect = self.destination.width / self.destination.height;
+				camera.updateProjectionMatrix();
+				xRayMaterial.uniforms.resolution.value = new THREE.Vector2(self.destination.width, self.destination.height);
+		    	renderer.setSize(self.destination.width, self.destination.height);
+		    	render();
+			});
+		}
+
+		// Function calls
+		render();
+		mouseDistort();
+		resize();
+
+	};
+}
+
+var modalXrayEffect = new Area15XRayEffect($('#ted'), $('#destination'));
 
 $(window).load(function(event) {
-	xrayScene.init();
+	modalXrayEffect.init();
 });
