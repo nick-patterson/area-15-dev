@@ -323,7 +323,6 @@ body {
   -webkit-transform: rotate(-5deg);
      -moz-transform: rotate(-5deg);
       -ms-transform: rotate(-5deg);
-       -o-transform: rotate(-5deg);
           transform: rotate(-5deg);
 }
 .slider-container .slider-inner-container .slide-3 .battery {
@@ -345,7 +344,6 @@ body {
   -webkit-transform: rotate(-8deg);
      -moz-transform: rotate(-8deg);
       -ms-transform: rotate(-8deg);
-       -o-transform: rotate(-8deg);
           transform: rotate(-8deg);
 }
 .slider-container .slider-inner-container .slide-3 .battery .battery-shadow {
@@ -368,7 +366,6 @@ body {
 .slider-container .vertical-align {
   top: 47%;
   -ms-transform: translateY(-50%);
-   -o-transform: translateY(-50%);
       transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -376,7 +373,6 @@ body {
 .slider-container .horizontal-align {
   left: 50%;
   -ms-transform: translateX(-50%);
-   -o-transform: translateX(-50%);
       transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -456,9 +452,8 @@ body {
   left: 0;
   white-space: nowrap;
   -webkit-transition: visibility .25s, opacity .25s;
-     -moz-transition: visibility .25s, opacity .25s;
-       -o-transition: visibility .25s, opacity .25s;
-          transition: visibility .25s, opacity .25s;
+  -moz-transition: visibility .25s, opacity .25s;
+  transition: visibility .25s, opacity .25s;
 }
 .tooltip.hover {
   cursor: none;
@@ -478,9 +473,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.75);
   color: white;
   -webkit-transition: max-width 1s ease-out;
-     -moz-transition: max-width 1s ease-out;
-       -o-transition: max-width 1s ease-out;
-          transition: max-width 1s ease-out;
+  -moz-transition: max-width 1s ease-out;
+  transition: max-width 1s ease-out;
 }
 .tooltip.tooltip-reveal {
   visibility: visible;
@@ -560,9 +554,8 @@ body {
   opacity: 0;
   visibility: visible;
   -webkit-transition: opacity .15s, visibility .15s;
-     -moz-transition: opacity .15s, visibility .15s;
-       -o-transition: opacity .15s, visibility .15s;
-          transition: opacity .15s, visibility .15s;
+  -moz-transition: opacity .15s, visibility .15s;
+  transition: opacity .15s, visibility .15s;
 }
 .magnifying-glass .magnifying-glass-reticle {
   position: absolute;
@@ -623,11 +616,9 @@ body {
   -webkit-transform-origin: center;
      -moz-transform-origin: center;
       -ms-transform-origin: center;
-       -o-transform-origin: center;
           transform-origin: center;
   -webkit-animation: rotate-inner-scope 25s infinite alternate ease-out;
      -moz-animation: rotate-inner-scope 25s infinite alternate ease-out;
-       -o-animation: rotate-inner-scope 25s infinite alternate ease-out;
           animation: rotate-inner-scope 25s infinite alternate ease-out;
 }
 .magnifying-glass .magnifying-glass-reticle svg#guage #ticks {
@@ -667,28 +658,15 @@ body {
   }
 }
 
-@-o-keyframes rotate-inner-scope {
-  0% {
-    -o-transform: rotate(0deg);
-       transform: rotate(0deg);
-  }
-  100% {
-    -o-transform: rotate(360deg);
-       transform: rotate(360deg);
-  }
-}
-
 @keyframes rotate-inner-scope {
   0% {
     -webkit-transform: rotate(0deg);
        -moz-transform: rotate(0deg);
-         -o-transform: rotate(0deg);
             transform: rotate(0deg);
   }
   100% {
     -webkit-transform: rotate(360deg);
        -moz-transform: rotate(360deg);
-         -o-transform: rotate(360deg);
             transform: rotate(360deg);
   }
 }
@@ -709,9 +687,8 @@ body {
   left: 65px;
   z-index: 1;
   -webkit-transition: left .5s;
-     -moz-transition: left .5s;
-       -o-transition: left .5s;
-          transition: left .5s;
+  -moz-transition: left .5s;
+  transition: left .5s;
 }
 .steampunk-map-button-container .map-button-passive, .steampunk-map-button-container .map-button-active {
   max-width: 100%;
@@ -747,7 +724,6 @@ body {
   -webkit-transform: translate(-50%, 0);
      -moz-transform: translate(-50%, 0);
       -ms-transform: translate(-50%, 0);
-       -o-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
 }
 .steampunk-player-bar .track {
@@ -756,7 +732,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   max-height: 20px;
 }
@@ -776,7 +751,6 @@ body {
   -webkit-transform: translate(-60%, -50%);
      -moz-transform: translate(-60%, -50%);
       -ms-transform: translate(-60%, -50%);
-       -o-transform: translate(-60%, -50%);
           transform: translate(-60%, -50%);
 }
 .steampunk-player-bar .brace.brace-right {
@@ -784,7 +758,6 @@ body {
   -webkit-transform: translate(8%, -50%);
      -moz-transform: translate(8%, -50%);
       -ms-transform: translate(8%, -50%);
-       -o-transform: translate(8%, -50%);
           transform: translate(8%, -50%);
 }
 .steampunk-player-bar .decorative-knob, .steampunk-player-bar .decorative-knob-flicker {
@@ -794,7 +767,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   max-height: 65%;
 }
@@ -805,7 +777,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   max-height: 73%;
 }
@@ -817,7 +788,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   height: 45px;
   width: 45px;
@@ -835,7 +805,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   height: 45px;
   width: 45px;
@@ -852,13 +821,11 @@ body {
   height: 72%;
   top: 57%;
   -webkit-transition: left .5s, right .5s;
-     -moz-transition: left .5s, right .5s;
-       -o-transition: left .5s, right .5s;
-          transition: left .5s, right .5s;
+  -moz-transition: left .5s, right .5s;
+  transition: left .5s, right .5s;
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
 .steampunk-player-bar .playbar-container .scroll-container {
@@ -870,7 +837,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
 .steampunk-player-bar .playbar-container .scroll-container .scroll-track {
@@ -881,7 +847,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   height: 80%;
   background: rgba(0, 0, 0, 0.85);
@@ -903,7 +868,6 @@ body {
   -webkit-transform: translate(-50%, -50%);
      -moz-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-       -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .steampunk-player-bar .playbar-container .scroll-container .scroll-teeth {
@@ -914,7 +878,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   height: 83%;
   background: url("../steampunk-room-ui/player/scroll-teeth.png") repeat-x;
@@ -937,7 +900,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
 .steampunk-player-bar .playbar-container .cog-window.cog-window-left {
@@ -995,7 +957,6 @@ body {
   -webkit-transform: translate(-50%, -50%);
      -moz-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-       -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   visibility: hidden;
 }
@@ -1031,7 +992,6 @@ body {
   background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.9)), to(transparent));
   background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
   background: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
-  background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
 }
 #vault-player-bar #vault-player-indicator {
@@ -1069,9 +1029,8 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.75);
   margin: 0 auto;
   -webkit-transition: opacity .5s;
-     -moz-transition: opacity .5s;
-       -o-transition: opacity .5s;
-          transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  transition: opacity .5s;
 }
 #vault-player-bar #vault-player-button-container .vault-player-button {
   position: relative;
@@ -1088,7 +1047,6 @@ body {
   -webkit-transform: translate(-50%, -50%);
      -moz-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-       -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg circle, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg line, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg path, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg polyline, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg polygon, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg rect, #vault-player-bar #vault-player-button-container .vault-player-button.vault-player-button-active svg ellipse {
@@ -1103,14 +1061,14 @@ body {
   -webkit-transform: translate(-50%, -65%);
      -moz-transform: translate(-50%, -65%);
       -ms-transform: translate(-50%, -65%);
-       -o-transform: translate(-50%, -65%);
           transform: translate(-50%, -65%);
   height: 35px;
   width: auto;
   -webkit-transition: height .15s ease-in-out, -webkit-transform .15s ease-in-out;
-     -moz-transition: height .15s ease-in-out, -moz-transform .15s ease-in-out;
-       -o-transition: height .15s ease-in-out, -o-transform .15s ease-in-out;
-          transition: height .15s ease-in-out, transform .15s ease-in-out;
+  transition: height .15s ease-in-out, -webkit-transform .15s ease-in-out;
+  -moz-transition: height .15s ease-in-out, transform .15s ease-in-out, -moz-transform .15s ease-in-out;
+  transition: height .15s ease-in-out, transform .15s ease-in-out;
+  transition: height .15s ease-in-out, transform .15s ease-in-out, -webkit-transform .15s ease-in-out, -moz-transform .15s ease-in-out;
 }
 #vault-player-bar #vault-player-button-container .vault-player-button svg circle, #vault-player-bar #vault-player-button-container .vault-player-button svg line, #vault-player-bar #vault-player-button-container .vault-player-button svg path, #vault-player-bar #vault-player-button-container .vault-player-button svg polyline, #vault-player-bar #vault-player-button-container .vault-player-button svg polygon, #vault-player-bar #vault-player-button-container .vault-player-button svg rect, #vault-player-bar #vault-player-button-container .vault-player-button svg ellipse {
   stroke: rgba(255, 255, 255, 0.5);
@@ -1119,9 +1077,8 @@ body {
   stroke-linecap: round;
   stroke-linejoin: round;
   -webkit-transition: stroke .2s, stroke-width .2s;
-     -moz-transition: stroke .2s, stroke-width .2s;
-       -o-transition: stroke .2s, stroke-width .2s;
-          transition: stroke .2s, stroke-width .2s;
+  -moz-transition: stroke .2s, stroke-width .2s;
+  transition: stroke .2s, stroke-width .2s;
 }
 
 .industrial-map-button-container {
@@ -1132,9 +1089,8 @@ body {
   left: 65px;
   z-index: 1;
   -webkit-transition: left .5s;
-     -moz-transition: left .5s;
-       -o-transition: left .5s;
-          transition: left .5s;
+  -moz-transition: left .5s;
+  transition: left .5s;
 }
 .industrial-map-button-container .map-button-passive, .industrial-map-button-container .map-button-active {
   max-width: 100%;
@@ -1160,9 +1116,8 @@ body {
   z-index: -1000;
   background: rgba(0, 0, 0, 0.8);
   -webkit-transition: 0.2s;
-     -moz-transition: 0.2s;
-       -o-transition: 0.2s;
-          transition: 0.2s;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
 }
 .modal.is-staged {
   z-index: 10;
@@ -1181,7 +1136,6 @@ body {
   -webkit-transform: translate(-50%, -50%) scale(0.97);
      -moz-transform: translate(-50%, -50%) scale(0.97);
       -ms-transform: translate(-50%, -50%) scale(0.97);
-       -o-transform: translate(-50%, -50%) scale(0.97);
           transform: translate(-50%, -50%) scale(0.97);
   z-index: 1000;
   overflow: hidden;
@@ -1192,7 +1146,6 @@ body {
   -webkit-transform: translate(-50%, -50%) scale(1);
      -moz-transform: translate(-50%, -50%) scale(1);
       -ms-transform: translate(-50%, -50%) scale(1);
-       -o-transform: translate(-50%, -50%) scale(1);
           transform: translate(-50%, -50%) scale(1);
 }
 .modal .modal-video-container {
@@ -1212,7 +1165,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
   max-height: 100%;
   width: 100%;
@@ -1246,12 +1198,12 @@ body {
   -webkit-transform: translate(0, 0);
      -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
           transform: translate(0, 0);
   -webkit-transition: -webkit-transform .5s;
-     -moz-transition: -moz-transform .5s;
-       -o-transition: -o-transform .5s;
-          transition: transform .5s;
+  transition: -webkit-transform .5s;
+  -moz-transition: transform .5s, -moz-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s, -moz-transform .5s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-info-tag {
   font-size: .55em;
@@ -1291,36 +1243,34 @@ body {
   -webkit-transform: translate(0, 0);
      -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
           transform: translate(0, 0);
   -webkit-transition: -webkit-transform .25s;
-     -moz-transition: -moz-transform .25s;
-       -o-transition: -o-transform .25s;
-          transition: transform .25s;
+  transition: -webkit-transform .25s;
+  -moz-transition: transform .25s, -moz-transform .25s;
+  transition: transform .25s;
+  transition: transform .25s, -webkit-transform .25s, -moz-transform .25s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-play-pause .MMVP-pause-path {
   -webkit-transform: translate(-100px, 0);
      -moz-transform: translate(-100px, 0);
       -ms-transform: translate(-100px, 0);
-       -o-transform: translate(-100px, 0);
           transform: translate(-100px, 0);
   -webkit-transition: -webkit-transform .25s;
-     -moz-transition: -moz-transform .25s;
-       -o-transition: -o-transform .25s;
-          transition: transform .25s;
+  transition: -webkit-transform .25s;
+  -moz-transition: transform .25s, -moz-transform .25s;
+  transition: transform .25s;
+  transition: transform .25s, -webkit-transform .25s, -moz-transform .25s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-play-pause.MMVP-play-controls-play-pause-pause-state .MMVP-play-path {
   -webkit-transform: translate(-100px, 0);
      -moz-transform: translate(-100px, 0);
       -ms-transform: translate(-100px, 0);
-       -o-transform: translate(-100px, 0);
           transform: translate(-100px, 0);
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-play-pause.MMVP-play-controls-play-pause-pause-state .MMVP-pause-path {
   -webkit-transform: translate(0, 0);
      -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
           transform: translate(0, 0);
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-progress-indicator {
@@ -1352,9 +1302,8 @@ body {
   height: 3px;
   background: white;
   -webkit-transition: width 1s ease-out;
-     -moz-transition: width 1s ease-out;
-       -o-transition: width 1s ease-out;
-          transition: width 1s ease-out;
+  -moz-transition: width 1s ease-out;
+  transition: width 1s ease-out;
   position: relative;
   top: 4px;
 }
@@ -1392,36 +1341,34 @@ body {
   -webkit-transform: translate(0, 0);
      -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
           transform: translate(0, 0);
   -webkit-transition: -webkit-transform .25s;
-     -moz-transition: -moz-transform .25s;
-       -o-transition: -o-transform .25s;
-          transition: transform .25s;
+  transition: -webkit-transform .25s;
+  -moz-transition: transform .25s, -moz-transform .25s;
+  transition: transform .25s;
+  transition: transform .25s, -webkit-transform .25s, -moz-transform .25s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-fullscreen-toggle .MMVP-normal-view-path {
   -webkit-transform: translate(100px, 0);
      -moz-transform: translate(100px, 0);
       -ms-transform: translate(100px, 0);
-       -o-transform: translate(100px, 0);
           transform: translate(100px, 0);
   -webkit-transition: -webkit-transform .25s;
-     -moz-transition: -moz-transform .25s;
-       -o-transition: -o-transform .25s;
-          transition: transform .25s;
+  transition: -webkit-transform .25s;
+  -moz-transition: transform .25s, -moz-transform .25s;
+  transition: transform .25s;
+  transition: transform .25s, -webkit-transform .25s, -moz-transform .25s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-fullscreen-toggle.MMVP-fullscreen-toggle-fullscreen-state .MMVP-fullscreen-path {
   -webkit-transform: translate(100px, 0);
      -moz-transform: translate(100px, 0);
       -ms-transform: translate(100px, 0);
-       -o-transform: translate(100px, 0);
           transform: translate(100px, 0);
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-video-controls-fullscreen-toggle.MMVP-fullscreen-toggle-fullscreen-state .MMVP-normal-view-path {
   -webkit-transform: translate(0, 0);
      -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
           transform: translate(0, 0);
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-volume-controls-container {
@@ -1475,9 +1422,8 @@ body {
   padding: 16px 0;
   text-align: center;
   -webkit-transition: opacity .3s, visibility .3s, top .3s;
-     -moz-transition: opacity .3s, visibility .3s, top .3s;
-       -o-transition: opacity .3s, visibility .3s, top .3s;
-          transition: opacity .3s, visibility .3s, top .3s;
+  -moz-transition: opacity .3s, visibility .3s, top .3s;
+  transition: opacity .3s, visibility .3s, top .3s;
   z-index: 1;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-volume-controls-container .MMVP-volume-slider-box .MMVP-volume-slider-box-interaction {
@@ -1493,9 +1439,8 @@ body {
   height: 100%;
   width: 100%;
   -webkit-transition: opacity .25s;
-     -moz-transition: opacity .25s;
-       -o-transition: opacity .25s;
-          transition: opacity .25s;
+  -moz-transition: opacity .25s;
+  transition: opacity .25s;
 }
 .modal .modal-video-container .modal-video-inner-container .MMVP-video-controls .MMVP-volume-controls-container .MMVP-volume-slider-box .MMVP-volume-slider-container .MMVP-volume-slider {
   margin: 0 auto;
@@ -1555,7 +1500,6 @@ body {
   -webkit-transform: translate(0, 150%);
      -moz-transform: translate(0, 150%);
       -ms-transform: translate(0, 150%);
-       -o-transform: translate(0, 150%);
           transform: translate(0, 150%);
 }
 .modal .modal-nav-control {
@@ -1567,7 +1511,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
 .modal .modal-nav-control:hover {
@@ -1658,7 +1601,6 @@ body {
   -webkit-transform: translate(0, -50%);
      -moz-transform: translate(0, -50%);
       -ms-transform: translate(0, -50%);
-       -o-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
 .modal .modal-model-container {
@@ -1774,7 +1716,6 @@ body {
   -webkit-transform: translate(-50%, -55%);
      -moz-transform: translate(-50%, -55%);
       -ms-transform: translate(-50%, -55%);
-       -o-transform: translate(-50%, -55%);
           transform: translate(-50%, -55%);
 }
 .modal.utility-modal .utility-screen-logo line, .modal.utility-modal .utility-screen-logo .triangle {
@@ -1795,7 +1736,6 @@ body {
   opacity: 0;
   -webkit-animation: device-rotate-rotation 6s infinite ease-in-out;
      -moz-animation: device-rotate-rotation 6s infinite ease-in-out;
-       -o-animation: device-rotate-rotation 6s infinite ease-in-out;
           animation: device-rotate-rotation 6s infinite ease-in-out;
 }
 .modal.utility-modal .utility-screen-logo.device-rotate-logo #rotate-path {
@@ -1803,11 +1743,9 @@ body {
   stroke-dashoffset: 2904.125;
   -webkit-animation: device-rotate-stroke-draw 6s infinite ease-in-out;
      -moz-animation: device-rotate-stroke-draw 6s infinite ease-in-out;
-       -o-animation: device-rotate-stroke-draw 6s infinite ease-in-out;
           animation: device-rotate-stroke-draw 6s infinite ease-in-out;
   -webkit-animation-fill-mode: forwards;
      -moz-animation-fill-mode: forwards;
-       -o-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
 .modal.utility-modal .device-rotate-text-container {
@@ -1820,17 +1758,14 @@ body {
   -webkit-transform: translate(-50%, -49%) scale(0, 1);
      -moz-transform: translate(-50%, -49%) scale(0, 1);
       -ms-transform: translate(-50%, -49%) scale(0, 1);
-       -o-transform: translate(-50%, -49%) scale(0, 1);
           transform: translate(-50%, -49%) scale(0, 1);
   padding: 0 1.5em;
   border-bottom: 2px solid white;
   -webkit-animation: device-rotate-text-container 6s infinite ease-in-out;
      -moz-animation: device-rotate-text-container 6s infinite ease-in-out;
-       -o-animation: device-rotate-text-container 6s infinite ease-in-out;
           animation: device-rotate-text-container 6s infinite ease-in-out;
   -webkit-animation-fill-mode: forwards;
      -moz-animation-fill-mode: forwards;
-       -o-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
 .modal.utility-modal .device-rotate-text-container .utility-screen-text {
@@ -1844,15 +1779,12 @@ body {
   -webkit-transform: translate(0, 300%);
      -moz-transform: translate(0, 300%);
       -ms-transform: translate(0, 300%);
-       -o-transform: translate(0, 300%);
           transform: translate(0, 300%);
   -webkit-animation: device-rotate-text 6s infinite ease-in-out;
      -moz-animation: device-rotate-text 6s infinite ease-in-out;
-       -o-animation: device-rotate-text 6s infinite ease-in-out;
           animation: device-rotate-text 6s infinite ease-in-out;
   -webkit-animation-fill-mode: forwards;
      -moz-animation-fill-mode: forwards;
-       -o-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
 
@@ -1862,7 +1794,6 @@ body {
   visibility: visible;
   -webkit-animation: loading 3s infinite;
      -moz-animation: loading 3s infinite;
-       -o-animation: loading 3s infinite;
           animation: loading 3s infinite;
 }
 
@@ -1879,18 +1810,6 @@ body {
 }
 
 @-moz-keyframes loading {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .25;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-o-keyframes loading {
   0% {
     opacity: 1;
   }
@@ -1991,39 +1910,6 @@ body {
     opacity: 0;
   }
 }
-@-o-keyframes device-rotate-rotation {
-  0% {
-    transform: translate(-50%, -45%) rotateZ(0deg);
-    -o-transform-origin: 0 center;
-       transform-origin: 0 center;
-    opacity: 0;
-  }
-  10% {
-    transform: translate(-50%, -55%) rotateZ(0deg);
-    -o-transform-origin: 0 center;
-       transform-origin: 0 center;
-    opacity: 1;
-  }
-  11% {
-    -o-transform-origin: center;
-       transform-origin: center;
-  }
-  20% {
-    transform: translate(-50%, -55%) rotateZ(-5deg);
-  }
-  35% {
-    transform: translate(-50%, -55%) rotateZ(90deg);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, -55%) rotateZ(90deg);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(-50%, -55%) rotateZ(90deg);
-    opacity: 0;
-  }
-}
 @keyframes device-rotate-rotation {
   0% {
     -webkit-transform: translate(-50%, -45%) rotateZ(0deg);
@@ -2031,7 +1917,6 @@ body {
             transform: translate(-50%, -45%) rotateZ(0deg);
     -webkit-transform-origin: 0 center;
        -moz-transform-origin: 0 center;
-         -o-transform-origin: 0 center;
             transform-origin: 0 center;
     opacity: 0;
   }
@@ -2041,14 +1926,12 @@ body {
             transform: translate(-50%, -55%) rotateZ(0deg);
     -webkit-transform-origin: 0 center;
        -moz-transform-origin: 0 center;
-         -o-transform-origin: 0 center;
             transform-origin: 0 center;
     opacity: 1;
   }
   11% {
     -webkit-transform-origin: center;
        -moz-transform-origin: center;
-         -o-transform-origin: center;
             transform-origin: center;
   }
   20% {
@@ -2087,17 +1970,6 @@ body {
   }
 }
 @-moz-keyframes device-rotate-stroke-draw {
-  0% {
-    stroke-dashoffset: 2904.125;
-  }
-  23% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-@-o-keyframes device-rotate-stroke-draw {
   0% {
     stroke-dashoffset: 2904.125;
   }
@@ -2169,48 +2041,20 @@ body {
     opacity: 0;
   }
 }
-@-o-keyframes device-rotate-text-container {
-  0% {
-    -o-transform: translate(-50%, -49%) scale(0, 1);
-       transform: translate(-50%, -49%) scale(0, 1);
-  }
-  32% {
-    -o-transform: translate(-50%, -49%) scale(0, 1);
-       transform: translate(-50%, -49%) scale(0, 1);
-  }
-  45% {
-    -o-transform: translate(-50%, -49%) scale(1, 1);
-       transform: translate(-50%, -49%) scale(1, 1);
-  }
-  80% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0;
-  }
-  100% {
-    -o-transform: translate(-50%, -49%) scale(1, 1);
-       transform: translate(-50%, -49%) scale(1, 1);
-    opacity: 0;
-  }
-}
 @keyframes device-rotate-text-container {
   0% {
     -webkit-transform: translate(-50%, -49%) scale(0, 1);
        -moz-transform: translate(-50%, -49%) scale(0, 1);
-         -o-transform: translate(-50%, -49%) scale(0, 1);
             transform: translate(-50%, -49%) scale(0, 1);
   }
   32% {
     -webkit-transform: translate(-50%, -49%) scale(0, 1);
        -moz-transform: translate(-50%, -49%) scale(0, 1);
-         -o-transform: translate(-50%, -49%) scale(0, 1);
             transform: translate(-50%, -49%) scale(0, 1);
   }
   45% {
     -webkit-transform: translate(-50%, -49%) scale(1, 1);
        -moz-transform: translate(-50%, -49%) scale(1, 1);
-         -o-transform: translate(-50%, -49%) scale(1, 1);
             transform: translate(-50%, -49%) scale(1, 1);
   }
   80% {
@@ -2222,7 +2066,6 @@ body {
   100% {
     -webkit-transform: translate(-50%, -49%) scale(1, 1);
        -moz-transform: translate(-50%, -49%) scale(1, 1);
-         -o-transform: translate(-50%, -49%) scale(1, 1);
             transform: translate(-50%, -49%) scale(1, 1);
     opacity: 0;
   }
@@ -2271,57 +2114,30 @@ body {
          transform: translate(0, 0);
   }
 }
-@-o-keyframes device-rotate-text {
-  0% {
-    -o-transform: translate(0, 300%);
-       transform: translate(0, 300%);
-  }
-  38% {
-    -o-transform: translate(0, 300%);
-       transform: translate(0, 300%);
-  }
-  48% {
-    -o-transform: translate(0, 30%);
-       transform: translate(0, 30%);
-  }
-  80% {
-    -o-transform: translate(0, 30%);
-       transform: translate(0, 30%);
-  }
-  100% {
-    -o-transform: translate(0, 0);
-       transform: translate(0, 0);
-  }
-}
 @keyframes device-rotate-text {
   0% {
     -webkit-transform: translate(0, 300%);
        -moz-transform: translate(0, 300%);
-         -o-transform: translate(0, 300%);
             transform: translate(0, 300%);
   }
   38% {
     -webkit-transform: translate(0, 300%);
        -moz-transform: translate(0, 300%);
-         -o-transform: translate(0, 300%);
             transform: translate(0, 300%);
   }
   48% {
     -webkit-transform: translate(0, 30%);
        -moz-transform: translate(0, 30%);
-         -o-transform: translate(0, 30%);
             transform: translate(0, 30%);
   }
   80% {
     -webkit-transform: translate(0, 30%);
        -moz-transform: translate(0, 30%);
-         -o-transform: translate(0, 30%);
             transform: translate(0, 30%);
   }
   100% {
     -webkit-transform: translate(0, 0);
        -moz-transform: translate(0, 0);
-         -o-transform: translate(0, 0);
             transform: translate(0, 0);
   }
 }
