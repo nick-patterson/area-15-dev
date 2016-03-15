@@ -26,6 +26,11 @@ var xrayScene = {
 
 			scene.add(surface);
 		    render();
+
+		    $(window).on('mousemove', function(event) {
+		    	zoomBlurEffect.uniforms.center.value = new THREE.Vector2(event.pageX,event.pageY);
+		    	render();
+		    });
 		},
 		function(xhr) {
 			console.log('progress');
@@ -45,6 +50,7 @@ var xrayScene = {
 		var copyPass = new THREE.ShaderPass( THREE.CopyShader );
 
 		var zoomBlurEffect = new THREE.ShaderPass( THREE.ZoomBlurShader );
+		zoomBlurEffect.uniforms.strength.value = 0.1125;
 		zoomBlurEffect.renderToScreen = true;
 
 		//var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
