@@ -88,12 +88,12 @@ function Area15XRayEffect(image, destination) {
 		// Create material from texture alone
 		material = new THREE.MeshBasicMaterial({map: texture});
 		material.transparent = true;
-		material.opacity = 0.43;
+		material.opacity = 0.36;
 
 		// Create X-Ray material from texture and zoom blur shader
 		xRayMaterial = new THREE.ShaderMaterial(THREE.ZoomBlurShader);
 		xRayMaterial.uniforms.tDiffuse.value = texture;
-		xRayMaterial.uniforms.strength.value = 0.05;
+		xRayMaterial.uniforms.strength.value = 0.06;
 		xRayMaterial.uniforms.resolution.value = new THREE.Vector2(self.destination.width, self.destination.height);
 
 		// Create regular surface from geometry and material
