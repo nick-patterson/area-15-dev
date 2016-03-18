@@ -9,14 +9,13 @@
   	bottom: 0;
   	right: 0;
 
-  	//display: none;
   	visibility: hidden;
   	opacity: 0;
 
   	z-index: -1000;
 
   	background: rgba(0,0,0,.8);
-  	transition: 0.2s;
+  	transition: opacity 0.2s;
 
 	&.is-staged {
 		z-index: 10;

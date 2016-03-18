@@ -14,7 +14,7 @@ var gulp            = require('gulp'),
 
 var src = {
   scss:       './src/styles/styles.scss',
-  js:         './src/scripts/*.js',
+  js:         './src/scripts/main/*.js',
   vendorJs:   './src/scripts/vendors/*.js'
 };
 
@@ -34,7 +34,7 @@ gulp.task('serve', ['sass'], function() {
 
     gulp.watch('./src/styles/*.scss', ['sass']);
     gulp.watch('./dist/*.html').on('change', reload);
-    gulp.watch('./dist/scripts/*/*.js').on('change', reload);
+    gulp.watch('./dist/scripts/**/*.js').on('change', reload);
 });
 
 gulp.task('scripts', function(){
