@@ -38,8 +38,6 @@ body {
 		height: 100%;
 		position: relative;
 		transform: translate3d(0,0,.001px);
-		-webkit-backface-visibility: hidden;
-		//-webkit-perspective: 1000;
 		backface-visibility: hidden;
 		perspective: 1000;
 

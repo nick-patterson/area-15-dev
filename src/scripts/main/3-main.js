@@ -143,7 +143,6 @@ var modal = {
 	init: function() {
 
 		// Pre-load all webGL models
-
 		modal.loadModels.init();
 
 		// Define initializing element
